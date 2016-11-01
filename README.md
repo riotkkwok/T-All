@@ -1,2 +1,7 @@
 # T-All
-Task/Talent Allocation System
+
+It's a Project Management System.
+
+> T => Task / Talent
+> 
+> All => Allocation
