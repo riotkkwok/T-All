@@ -1,0 +1,34 @@
+@charset "utf-8";
+
+$mainColor: #00a6fb !default;
+$color1: #cee0dc !default;
+$color2: #cbeaa6 !default;
+
+$bgColor1: #ffffff !default;
+$bgColor2: #f3f9d2 !default;
+
+$fontColor: #000000 !default;
+$fontColor2: rgba(0,0,0, 0.75) !default;
+
+.ui-font1{
+    color: $fontColor;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 28px;
+}
+.ui-font2{
+    color: $fontColor;
+    font-size: 16px;
+    line-height: 24px;
+}
+.ui-font3{
+    color: $fontColor2;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 24px;
+}
+.ui-font4{
+    color: $fontColor2;
+    font-size: 14px;
+    line-height: 22px;
+}
