@@ -9,6 +9,8 @@ $bgColor2: #f3f9d2 !default;
 
 $fontColor: #000000 !default;
 $fontColor2: rgba(0,0,0, 0.75) !default;
+$fontColor3: #ffffff !default;
+$fontColor4: rgba(255,255,255, 0.75) !default;
 
 .ui-font1{
     color: $fontColor;
@@ -29,6 +31,28 @@ $fontColor2: rgba(0,0,0, 0.75) !default;
 }
 .ui-font4{
     color: $fontColor2;
+    font-size: 14px;
+    line-height: 22px;
+}
+.ui-font1-rev{
+    color: $fontColor3;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 28px;
+}
+.ui-font2-rev{
+    color: $fontColor3;
+    font-size: 16px;
+    line-height: 24px;
+}
+.ui-font3-rev{
+    color: $fontColor4;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 24px;
+}
+.ui-font4-rev{
+    color: $fontColor4;
     font-size: 14px;
     line-height: 22px;
 }
