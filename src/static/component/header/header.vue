@@ -57,7 +57,7 @@ a.logo {
 </style>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 module.exports = {
     data: {
@@ -79,7 +79,7 @@ module.exports = {
             this.showSettingsList = !this.showSettingsList;
         },
         loginClick() {
-            mapActions(['showLoginPanel']);
+            mapMutations(['showLoginPanel']);
         },
         logoutClick() {
             mapActions(['userLogout']);
