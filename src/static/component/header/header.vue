@@ -4,8 +4,8 @@ header
     a#settings(@click="settingsClick" v-show="isLoginStatusReady") 设置
     div#username 游客
     ul.settings-list(v-show="showSettingsList")
-        li.settings-item(v-show="!isLogined") 登录
-        li.settings-item(v-show="isLogined") 退出
+        li.settings-item(v-show="!isLogined" @click="loginClick") 登录
+        li.settings-item(v-show="isLogined" @click="logoutClick") 退出
 </template>
 
 <style lang="sass">
@@ -57,31 +57,32 @@ a.logo {
 </style>
 
 <script>
-let  
-    actions = require('../../../vuex/actions.js'),
-    getters = require('../../../vuex/getters.js');
+import { mapGetters, mapActions } from 'vuex'
+
 module.exports = {
-    vuex: {
-         actions: actions,
-         getters: getters
-    },
     data: {
         showSettingsList: false
     }
     computed: {
-        isLoginStatusReady: function(){
-            return !!getters.loginInfo;
+        isLoginStatusReady() {
+            return !!mapGetters(['loginInfo']);
         },
-        isLogined: function(){
-            return this.isLoginStatusReady && !!getters.loginInfo.userName;
+        isLogined() {
+            return this.isLoginStatusReady && !!mapGetters(['loginInfo']).userName;
         }
     },
     methods: {
-        logoClick: function(){
+        logoClick() {
             // TODO - show About
         },
-        settingsClick: function(){
+        settingsClick() {
             this.showSettingsList = !this.showSettingsList;
+        },
+        loginClick() {
+            mapActions(['showLoginPanel']);
+        },
+        logoutClick() {
+            mapActions(['userLogout']);
         }
     }
 };
