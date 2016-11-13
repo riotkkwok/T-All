@@ -8,7 +8,7 @@ header
         li.settings-item(v-show="isLogined" @click="logoutClick") 退出
 </template>
 
-<style lang="sass">
+<style lang="scss">
 header {
     @extend .cf;
     height: 30px;
