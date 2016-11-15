@@ -28,8 +28,7 @@
     "vue-loader": "^8.5.3",
     "vue-lazyload-img": "^0.1.5",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1",
-    "vue-router": "^0.7.13"
+    "webpack-dev-server": "^1.14.1"
   },
   "devDependencies": {
     "babel-core": "^6.10.4",
