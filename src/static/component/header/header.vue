@@ -8,7 +8,10 @@ header
         li.settings-item(v-show="isLogined" @click="logoutClick") 退出
 </template>
 
-<style lang="scss">
+<style lang="sass">
+@import "../../scss/normalize.scss";
+@import "../../scss/theme.scss";
+
 header {
     @extend .cf;
     height: 30px;
@@ -62,7 +65,7 @@ import { mapGetters, mapActions, mapMutations } from 'vuex'
 module.exports = {
     data: {
         showSettingsList: false
-    }
+    },
     computed: {
         isLoginStatusReady() {
             return !!mapGetters(['loginInfo']);
