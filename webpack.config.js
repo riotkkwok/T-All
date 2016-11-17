@@ -12,6 +12,7 @@ path.joinFormat = function(){
         .replace(/\\+/g, '/')
         .replace(/(^http[s]?:)[\/]+/g, '$1//');
 };
+path.component = 'src/static/component';
 
 
 module.exports = {
@@ -75,6 +76,11 @@ module.exports = {
         fallback: path.join(__dirname, "node_modules"),
         root: './',
         alias: {
+            'header': path.join(__dirname, path.component, 'header/header.vue'),
+            'editor': path.join(__dirname, path.component, 'editor/editor.vue'),
+            'timeTable': path.join(__dirname, path.component, 'timeTable/timeTable.vue'),
+            'footer': path.join(__dirname, path.component, 'footer/footer.vue'),
+            'loginPanel': path.join(__dirname, path.component, 'loginPanel/loginPanel.vue'),
         }
     },
     devtool: 'source-map',
@@ -89,7 +95,7 @@ module.exports = {
             minify: false
         }),
         new ManifestPlugin({
-            fileName: '../assets/rev-manifest.json',
+            fileName: '../../../dist/server/assets/rev-manifest.json',
             basePath: ''
         
         })
