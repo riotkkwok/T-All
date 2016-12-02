@@ -22,8 +22,8 @@ module.exports = {
         colors: true,
         contentBase: config.deployserver.root,
         port: 5000,
-        // hot: true,
-        // inline: true
+        hot: true,
+        inline: true
 
     },
     entry: {
@@ -31,17 +31,17 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, config.path.jsDest),
-        publicPath: path.joinFormat(
-            config.deployserver.path, 
-            path.relative(
-                path.join(
-                    config.deployserver.root, 
-                    config.deployserver.path
-                ), 
-                config.path.jsDest
-            ), 
-            '/'
-        ),
+        // publicPath: path.joinFormat(
+        //     config.deployserver.path, 
+        //     path.relative(
+        //         path.join(
+        //             config.deployserver.root, 
+        //             config.deployserver.path
+        //         ), 
+        //         config.path.jsDest
+        //     ), 
+        //     '/'
+        // ),
         filename: '[name]-[chunkhash:8].js'
     },
     module: {
@@ -76,12 +76,14 @@ module.exports = {
         fallback: path.join(__dirname, "node_modules"),
         root: './',
         alias: {
+            'app': path.join(__dirname, path.component, 'app/app.vue'),
             'header': path.join(__dirname, path.component, 'header/header.vue'),
-            'editor': path.join(__dirname, path.component, 'editor/editor.vue'),
-            'timeTable': path.join(__dirname, path.component, 'timeTable/timeTable.vue'),
+            // 'editor': path.join(__dirname, path.component, 'editor/editor.vue'),
+            // 'timeTable': path.join(__dirname, path.component, 'timeTable/timeTable.vue'),
             'footer': path.join(__dirname, path.component, 'footer/footer.vue'),
             'loginPanel': path.join(__dirname, path.component, 'loginPanel/loginPanel.vue'),
-        }
+        },
+        publicPath: '/'
     },
     devtool: 'source-map',
     plugins: [
