@@ -1,4 +1,9 @@
 require('../scss/index.scss');
 
 const Vue = require('vue'),
-    header = new Vue(require('header'));
+    app = require('app');
+
+new Vue({
+    el: '#app',
+    render: h => h(app)
+});
