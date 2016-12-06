@@ -1,16 +1,18 @@
 <template lang="jade">
-    div.main
+    div#app
 </template>
 
 <script>
+import wHeader from 'header'
+
 export default {
     name: 'app',
     components: {
-        'wHeader': require('header'),
-        'wEditor': require('../editor/editor.js'),
-        'wTimeTable': require('../timeTable/timeTable.js'),
-        'wFooter': require('footer'),
-        'wLoginPanel': require('loginPanel')
+        wHeader,
+        // 'wEditor': require('../editor/editor.js'),
+        // 'wTimeTable': require('../timeTable/timeTable.js'),
+        // 'wFooter': require('footer'),
+        // 'wLoginPanel': require('loginPanel')
     }
 };
 </script>
