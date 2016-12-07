@@ -2,7 +2,7 @@
 header
     a.logo(href="javascript:void(0);" @click="logoClick")
     a#settings(@click="settingsClick" v-show="isLoginStatusReady") 设置
-    div#username 游客
+    div#username(@click="loginClick") 游客
     ul.settings-list(v-show="showSettingsList")
         li.settings-item(v-show="!isLogined" @click="loginClick") 登录
         li.settings-item(v-show="isLogined" @click="logoutClick") 退出
@@ -89,10 +89,12 @@ module.exports = {
             this.showSettingsList = !this.showSettingsList;
         },
         loginClick() {
-            mapMutations(['showLoginPanel']);
+            this.$store.commit('showLoginPanel');
+            this.showSettingsList = false;
         },
         logoutClick() {
             mapActions(['userLogout']);
+            this.showSettingsList = false;
         }
     }
 };
