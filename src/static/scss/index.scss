@@ -1,4 +1,9 @@
 @charset "utf-8";
 
 @import "normalize.scss";
+@import "base.scss";
 @import "theme.scss";
+
+body{
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+}

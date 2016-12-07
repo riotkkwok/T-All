@@ -431,25 +431,3 @@ th {
 /* ======================================== End of original normalize.css ======================================== */
 /* =============================================================================================================== */
 
-
-/**
- * Define global class for common usage
- */
-.hidden{
-	display: none !important;
-}
-
-.invisible{
-	visibility: hidden;
-}
-
-.clearfix, .cf {
-    zoom: 1;
-    &:after {
-	    content: "";
-	    display: block;
-	    height: 0;
-	    clear: both;
-	    visibility: hidden;
-	}
-}
