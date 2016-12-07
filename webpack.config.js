@@ -86,7 +86,7 @@ module.exports = {
             // 'editor': path.join(__dirname, path.component, 'editor/editor.vue'),
             // 'timeTable': path.join(__dirname, path.component, 'timeTable/timeTable.vue'),
             'footer': path.join(__dirname, path.component, 'footer/footer.vue'),
-            // 'loginPanel': path.join(__dirname, path.component, 'loginPanel/loginPanel.vue'),
+            'loginPanel': path.join(__dirname, path.component, 'loginPanel/loginPanel.vue'),
         },
         publicPath: '/'
     },
