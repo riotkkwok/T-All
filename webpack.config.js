@@ -28,7 +28,6 @@ module.exports = {
     },
     entry: {
         'index': './src/static/js/index.js'
-        // 'app': './src/static/js/app.js'
     },
     output: {
         path: path.join(__dirname, config.path.jsDest),
@@ -86,7 +85,7 @@ module.exports = {
             'header': path.join(__dirname, path.component, 'header/header.vue'),
             // 'editor': path.join(__dirname, path.component, 'editor/editor.vue'),
             // 'timeTable': path.join(__dirname, path.component, 'timeTable/timeTable.vue'),
-            // 'footer': path.join(__dirname, path.component, 'footer/footer.vue'),
+            'footer': path.join(__dirname, path.component, 'footer/footer.vue'),
             // 'loginPanel': path.join(__dirname, path.component, 'loginPanel/loginPanel.vue'),
         },
         publicPath: '/'

@@ -1,9 +1,12 @@
 <template lang="jade">
     div#app
+        wHeader
+        wFooter
 </template>
 
 <script>
 import wHeader from 'header'
+import wFooter from 'footer'
 
 export default {
     name: 'app',
@@ -11,7 +14,7 @@ export default {
         wHeader,
         // 'wEditor': require('../editor/editor.js'),
         // 'wTimeTable': require('../timeTable/timeTable.js'),
-        // 'wFooter': require('footer'),
+        wFooter,
         // 'wLoginPanel': require('loginPanel')
     }
 };

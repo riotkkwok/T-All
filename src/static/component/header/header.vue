@@ -9,7 +9,7 @@ header
 </template>
 
 <style lang="sass">
-@import "../../scss/normalize.scss";
+@import "../../scss/base.scss";
 @import "../../scss/theme.scss";
 
 header {
@@ -23,16 +23,20 @@ a.logo {
     display: inline-block;
     height: 30px;
     width: 60px;
+    cursor: pointer;
 }
 #username {
     @extend .ui-font3-rev;
     float: right;
+    line-height: 28px;
     padding: 1px 10px;
+    cursor: pointer;
 }
 #settings {
     @extend .ui-font1-rev;
     float: right;
     padding: 1px 10px;
+    cursor: pointer;
 }
 .settings-list {
     position: absolute;
@@ -42,6 +46,7 @@ a.logo {
     border: 1px solid $color1;
     border-radius: 3px;
     background-color: $bgColor2;
+    cursor: pointer;
 }
 .settings-list:before {
     content: ' ';
@@ -63,8 +68,10 @@ a.logo {
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 module.exports = {
-    data: {
-        showSettingsList: false
+    data(){
+        return {
+            showSettingsList: false
+        }
     },
     computed: {
         isLoginStatusReady() {
