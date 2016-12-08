@@ -3,11 +3,11 @@ div#loginPanel(v-show="showLoginPanel")
     div.g-mask(@click="hideLoginPanel")
     div.g-dialog
         div.msg 请输入用户名和登录密码
-        div.inputBox(type="text")
-            input.nameInput
-        div.inputBox(type="password")
-            input.pwdInput
-        button.loginBtn 登录
+        div.inputBox
+            input.nameInput(type="text" placeholder="用户名")
+        div.inputBox
+            input.pwdInput(type="password" placeholder="密码")
+        button.loginBtn(@click="loginSubmit") 登录
 </template>
 
 <style lang="sass">
@@ -28,6 +28,10 @@ div#loginPanel(v-show="showLoginPanel")
             border-bottom: 1px solid $darkColor2;
             &:active{
                 border-bottom: 1px solid $darkColor1;
+            }
+            &::-webkit-input-placeholder{
+                color: #cccccc;
+                font-weight: normal;
             }
         }
     }
@@ -51,7 +55,9 @@ export default {
         'showLoginPanel'
     ]),
     methods: {
-        loginSubmit() {},
+        loginSubmit() {
+            this.$store.dispatch('userLogin');
+        },
         hideLoginPanel() {
             this.$store.commit('hideLoginPanel');
         }
