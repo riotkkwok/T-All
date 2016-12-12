@@ -13,6 +13,7 @@ path.joinFormat = function(){
         .replace(/(^http[s]?:)[\/]+/g, '$1//');
 };
 path.component = 'src/static/component';
+path.lib = 'src/static/js/lib';
 
 
 module.exports = {
@@ -64,10 +65,6 @@ module.exports = {
         }, {
             test: /\.(png|jpg|gif)$/,
             loader: 'url?limit=10000&name=../images/[name]-[hash:8].[ext]'
-        }, {
-            // shiming the module
-            test: path.join(__dirname, 'src/static/js/lib/'),
-            loader: 'imports?this=>window'
         }]
 
     },
@@ -84,9 +81,10 @@ module.exports = {
             'app': path.join(__dirname, path.component, 'app/app.vue'),
             'header': path.join(__dirname, path.component, 'header/header.vue'),
             // 'editor': path.join(__dirname, path.component, 'editor/editor.vue'),
-            // 'timeTable': path.join(__dirname, path.component, 'timeTable/timeTable.vue'),
+            'timeTable': path.join(__dirname, path.component, 'timeTable/timeTable.js'),
             'footer': path.join(__dirname, path.component, 'footer/footer.vue'),
             'loginPanel': path.join(__dirname, path.component, 'loginPanel/loginPanel.vue'),
+            'myUtil': path.join(__dirname, path.lib, 'util.js'),
         },
         publicPath: '/'
     },

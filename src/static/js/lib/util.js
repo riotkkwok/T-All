@@ -12,7 +12,7 @@ export const timeString = (d) => {
 }
 
 export const addToList = (obj, val) => {
-    if(obj instanceOf Array){
+    if(obj instanceof Array){
         obj.push(val);
     }else{
         obj = [val];

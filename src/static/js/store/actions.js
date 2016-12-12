@@ -1,3 +1,5 @@
+import myUtil from 'myUtil'
+
 export const userLogout = ({commit}) => {
     // TODO
     logger(['userLogout()']);
@@ -13,7 +15,6 @@ function ajax(options){
 }
 
 function logger(...str){
-    const d = new Date(),
-        ds = (d.getHours()+':'+d.getMinutes()+':'+d.getSeconds()).replace(/\b([0-9]{1})\b/g, '0$1');
-    console.log('[vuex-actions] '+ds+' - '+str.join(' , '));
+    const d = new Date();
+    console.log('[vuex-actions] '+myUtil.timeString(d)+' - '+str.join(' , '));
 }
