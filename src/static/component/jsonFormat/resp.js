@@ -26,5 +26,17 @@ export default resp = {
                 }
             ]
         }
+    },
+
+    getAssigneeList: {
+        code: 0,
+        data: {
+            assigneeList: [
+                {
+                    id: '', // ID
+                    name: '', // 名字
+                }
+            ]
+        }
     }
 }

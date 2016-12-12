@@ -8,7 +8,8 @@ Vue.use(Vuex);
 
 const state = {
     showLoginPanel: false,
-    userInfo: {}
+    userInfo: {},
+    assigneeList: []
 };
 
 const store = new Vuex.Store({

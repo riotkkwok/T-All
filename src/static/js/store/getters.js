@@ -28,3 +28,7 @@ export const endDate = (state) => {
         state.startDate.getFullYear() : (new Date()).getFullYear();
     return new Date(y+'/12/31');
 }
+
+export const assigneeList = (state) => {
+    return state.assigneeList;
+}
