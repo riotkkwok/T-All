@@ -18,3 +18,8 @@ export const addToList = (obj, val) => {
         obj = [val];
     }
 }
+
+export const logger = (...str) => {
+    const d = new Date();
+    console.log('[vuex-actions] '+myUtil.timeString(d)+' - '+str.join(' , '));
+}
