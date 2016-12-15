@@ -7,7 +7,7 @@
 @import "../../scss/theme.scss";
 
 footer{
-    @extend .ui-font4;
+    @extend %ui-font4;
     position: fixed;
     bottom: 0;
     left: 0;

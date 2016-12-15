@@ -26,14 +26,14 @@ a.logo {
     cursor: pointer;
 }
 #username {
-    @extend .ui-font3-rev;
+    @extend %ui-font3-rev;
     float: right;
     line-height: 28px;
     padding: 1px 10px;
     cursor: pointer;
 }
 #settings {
-    @extend .ui-font1-rev;
+    @extend %ui-font1-rev;
     float: right;
     padding: 1px 10px;
     cursor: pointer;
@@ -59,7 +59,7 @@ a.logo {
     border-left: 3px solid transparent;
 }
 .settings-item {
-    @extend .ui-font1;
+    @extend %ui-font1;
     text-align: center;
 }
 </style>
@@ -93,7 +93,7 @@ module.exports = {
             this.showSettingsList = false;
         },
         logoutClick() {
-            mapActions(['userLogout']);
+            this.$store.dispatch(['userLogout']);
             this.showSettingsList = false;
         }
     }

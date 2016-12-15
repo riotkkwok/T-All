@@ -16,13 +16,13 @@ div#loginPanel(v-show="showLoginPanel")
 
 #loginPanel{
     .msg{
-        @extend .ui-font2;
+        @extend %ui-font2;
     }
     .inputBox
     {
         padding: 5px 0;
         input{
-            @extend .ui-font1;
+            @extend %ui-font1;
             text-align: center;
             width: 100%;
             border-bottom: 1px solid $darkColor2;
@@ -36,7 +36,7 @@ div#loginPanel(v-show="showLoginPanel")
         }
     }
     .loginBtn{
-        @extend .ui-font1-rev;
+        @extend %ui-font1-rev;
         box-sizing: border-box;
         width: 100%;
         border-radius: 2px;
