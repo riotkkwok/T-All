@@ -1,4 +1,4 @@
-export default resp = {
+export default {
     getTaskList: {
         code: 0,
         data: {
@@ -6,6 +6,7 @@ export default resp = {
                 {
                     id: '', // 任务ID
                     name: '', // 任务名
+                    color: '', // 颜色
                     asg: [ // 参与人员
                         {
                             id: '',
@@ -13,7 +14,7 @@ export default resp = {
                                 dev: [''], // 开发时间
                                 intg: [''], // 联调自测时间
                                 test: [''], // 测试时间
-                                rls: '' // 上线时间
+                                rls: [''] // 上线时间
                             }
                         }
                     ],
