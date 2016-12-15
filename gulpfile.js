@@ -23,14 +23,16 @@ function runWebpack(){
     });
 }
 
-gulp.task('all', function(done){
-    new Promise(function(resolve){
+gulp.task('all', function(){
+    // new Promise(function(resolve){
         runWebpack();
-        resolve();
-    }).then();
+        // resolve();
+    // }).then();
     // runSequence('webpack', 'rev', done);
 });
 
 gulp.task('watch', function(){
-    gulp.watch(['./src/static/**/*.*'], 'all');
+    gulp.watch(['./src/static/**/*.*'], ['all']);
 });
+
+gulp.task('watchAll', ['all', 'watch']);
