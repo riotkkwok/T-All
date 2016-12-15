@@ -7,6 +7,7 @@ export default {
                     id: '', // 任务ID
                     name: '', // 任务名
                     color: '', // 颜色
+                    nth: 0, // 展示位置
                     asg: [ // 参与人员
                         {
                             id: '',

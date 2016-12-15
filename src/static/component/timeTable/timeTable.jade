@@ -1,15 +1,21 @@
 div#timeTable
     div.filterBox
     div.tt-container
-        ul.tt-dateList
-            li.tt-date(v-for="date in dateList")
-                | {{ date.dateStr2 }}
-        ul.tt-ppl(v-for="ppl in pplList")
-            li.tt-name
-                | {{ ppl.name }}
-            li.tt-date(v-for="date in dateList")
-                ul.tt-task(v-show="ppl[date] && ppl[date].isOnLeave === false")
-                    template(v-if="ppl[date] && ppl[date].tasks")
-                        li.tt-taskItem(v-for="task in ppl[date].tasks")
-                div.tt-leave(v-show="ppl[date] && ppl[date].isOnLeave === true")
-                    | {{ ppl.leaveType }}
+        div.tt-wrapper(:style="dateListUI")
+            ul.tt-dateList.cf
+                li.tt-name
+                    | Name
+                li.tt-date(v-for="date in dateList")
+                    | {{ date.dateStr2 }}
+            ul.tt-ppl.cf(v-for="ppl in pplList")
+                li.tt-name
+                    | {{ ppl.name }}
+                li.tt-date(v-for="date in dateList")
+                    ul.tt-task(v-if="!ppl[date.dateStr] || !ppl[date.dateStr].leaveType")
+                        li.tt-taskItem(:style="{ backgroundColor: ppl[date.dateStr][0].color }")
+                            | {{ ppl[date.dateStr][0].stage }}
+                        li.tt-taskItem(:style="{ backgroundColor: ppl[date.dateStr][1].color }")
+                            | {{ ppl[date.dateStr][1].stage }}
+                    div.tt-leave(v-if="ppl[date.dateStr] && ppl[date.dateStr].leaveType")
+                        | {{ ppl[date.dateStr].leaveType }}
+                       

@@ -1,0 +1,51 @@
+@charset "utf-8";
+
+@import "../../scss/theme.scss";
+
+#timeTable{
+    padding: 5px 10px;
+}
+
+.filterBox{
+    @extend %ui-font2;
+    width: 100%;
+    padding: 4px 0;
+}
+
+.tt-container{
+    overflow-x: scroll;
+    padding-bottom: 10px;
+}
+.tt-dateList{
+    border-bottom: 2px solid $darkColor1;
+    background-color: $bgColor2;
+    .tt-name, .tt-date{
+        padding: 2px 0;
+    }
+}
+.tt-ppl{
+    border-bottom: 1px solid $darkColor2;
+    .tt-name{
+        line-height: 44px;
+    }
+}
+.tt-name{
+    @extend %ui-font2;
+    box-sizing: border-box;
+    float: left;
+    text-align: center;
+    width: 75px;
+    border-right: 1px solid $darkColor2;
+}
+.tt-date{
+    @extend %ui-font4;
+    float: left;
+    text-align: center;
+    min-height: 1px;
+    width: 45px;
+}
+.tt-taskItem{
+    text-align: center;
+    cursor: pointer;
+    height: 22px;
+}
