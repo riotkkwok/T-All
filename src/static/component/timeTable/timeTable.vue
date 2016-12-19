@@ -72,7 +72,10 @@ export default {
             while(true){
                 dList.push({
                     dateStr: myUtil.dateString(d),
-                    dateStr2: myUtil.dateString2(d)
+                    dateStr2: myUtil.dateString2(d),
+                    dayStr: myUtil.dayString(d),
+                    isWE: !(d.getDay() % 6),
+                    isPH: !!this.$store.getters['holidayList'][myUtil.dateString(d)]
                 });
                 if(d >= ed){
                     break;

@@ -29,6 +29,10 @@ export const endDate = (state) => {
     return new Date(y+'/12/31');
 }
 
+export const holidayList = (state) => {
+    return state.holidayList;
+}
+
 export const assigneeList = (state) => {
     return state.assigneeList;
 }
