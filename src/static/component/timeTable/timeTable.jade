@@ -1,21 +1,30 @@
 div#timeTable
     div.filterBox
+
     div.tt-container
-        div.tt-wrapper(:style="dateListUI")
+        div.tt-headCol
             ul.tt-dateList.cf
                 li.tt-name
                     | Name
-                li.tt-date(v-for="date in dateList")
-                    | {{ date.dateStr2 }}
             ul.tt-ppl.cf(v-for="ppl in pplList")
                 li.tt-name
                     | {{ ppl.name }}
-                li.tt-date(v-for="date in dateList")
-                    ul.tt-task(v-if="!ppl[date.dateStr] || !ppl[date.dateStr].leaveType")
-                        li.tt-taskItem(:style="{ backgroundColor: ppl[date.dateStr][0].color }")
-                            | {{ ppl[date.dateStr][0].stage }}
-                        li.tt-taskItem(:style="{ backgroundColor: ppl[date.dateStr][1].color }")
-                            | {{ ppl[date.dateStr][1].stage }}
-                    div.tt-leave(v-if="ppl[date.dateStr] && ppl[date.dateStr].leaveType")
-                        | {{ ppl[date.dateStr].leaveType }}
-                       
+        div.tt-wrapper(@scroll="delayScroll(visibleArea)")
+            div.tt-main(:style="dateListUI")
+                ul.tt-dateList.cf
+                    li.tt-date(v-for="date in dateList")
+                        | {{ date.dateStr2 }}
+                ul.tt-ppl.cf(v-for="ppl in pplList")
+                    li.tt-date(v-for="date in dateList")
+                        ul.tt-task(v-if="!ppl[date.dateStr] || !ppl[date.dateStr].leaveType")
+                            li.tt-taskItem(:style="{ backgroundColor: ppl[date.dateStr][0].color }")
+                                | {{ ppl[date.dateStr][0].stage }}
+                            li.tt-taskItem(:style="{ backgroundColor: ppl[date.dateStr][1].color }")
+                                | {{ ppl[date.dateStr][1].stage }}
+                        div.tt-leave(v-if="ppl[date.dateStr] && ppl[date.dateStr].leaveType")
+                            | {{ ppl[date.dateStr].leaveType }}
+
+    div.taskView
+        ul.tv-list.cf
+            li.tv-item(v-for="task in taskView", :style="{ backgroundColor: task.color }")
+                | {{ task.name }}

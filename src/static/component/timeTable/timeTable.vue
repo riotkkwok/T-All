@@ -8,15 +8,6 @@ import { mapState, mapActions, mapMutations } from 'vuex'
 
 import * as myUtil from 'myUtil'
 
-const createDate = (dates, newDates) => {
-    for(let i=0; i<newDates.length; i++){
-        if(!dates.contains(newDates[i])){
-            dates.push(newDates[i]);
-        }
-    }
-    return dates.sort();
-}
-
 const createPList = (asignees, dates) => {
     const pplList = {};
     let ppl;
@@ -40,9 +31,17 @@ const createPList = (asignees, dates) => {
     return pplList;
 }
 
+const pushTask = (tList, tId) => {
+    if(tId !== null && typeof tId === 'string' && tList.indexOf(tId) === -1){
+        tList.push(tId);
+    }
+}
+
 export default {
     mounted() {
         this.needRender = true;
+        window.onresize = this.visibleArea;
+        this.visibleArea();
     },
     data(){
         return {
@@ -50,7 +49,9 @@ export default {
             nowDate: this.$store.getters['nowDate'],
             endDate: this.$store.getters['endDate'],
             taskList: this.$store.getters['taskList'],
-            needRender: false
+            needRender: false,
+            scrolling: false,
+            curTask: []
         };
     },
     computed: {
@@ -109,9 +110,63 @@ export default {
                 }
             }
             return pplList;
+        },
+        taskView: {
+            set(ls){
+                this.curTask = ls;
+            },
+            get(){
+                return this.curTask;
+            }
         }
     },
     methods: {
+        delayScroll(fn) {
+            const that = this;
+            if(!!that.scrolling){
+                return;
+            }else{
+                that.scrolling = true;
+                setTimeout(function(){
+                    that.scrolling = false;
+                    fn.call();
+                }, 1000);
+            }
+        },
+        visibleArea() {
+            const wpRect = document.querySelector('.tt-wrapper').getBoundingClientRect(),
+                hcW = document.querySelector('.tt-headCol').clientWidth,
+                dtRect = document.querySelector('.tt-dateList > .tt-date').getBoundingClientRect(),
+                va = {
+                    start: parseInt(-1*(dtRect.left-wpRect.left-hcW) / dtRect.width, 10),
+                    size: Math.ceil((wpRect.width-hcW) / dtRect.width)
+                };
+            let tmp, tmpDate, result = [];
+            if(va.start < 0){
+                va.start = 0;
+            }
+            va.startDate = (new Date(this.startDate));
+            va.startDate.setDate(this.startDate.getDate()+va.start)
+            va.endDate = (new Date(va.startDate))
+            va.endDate.setDate(va.startDate.getDate()+va.size-1);
+            for(let id in this.pplList){
+                tmp = this.pplList[id];
+                tmpDate = va.startDate;
+                while(tmpDate <= va.endDate){
+                    pushTask(result, tmp[myUtil.dateString(tmpDate)][0].id);
+                    pushTask(result, tmp[myUtil.dateString(tmpDate)][1].id);
+                    tmpDate.setDate(tmpDate.getDate() + 1);
+                }
+            }
+            for(let i=0, j; i<this.taskList.length; i++){
+                // TODO(enhance) - 提前生成一个以id和name为映射的对象进行查找
+                j = result.indexOf(this.taskList[i].id);
+                if(j >= 0){
+                    result[j] = this.taskList[i];
+                }
+            }
+            this.curTask = result;
+        }
     }
 };
 

@@ -13,13 +13,29 @@
 }
 
 .tt-container{
+    position: relative;
+}
+.tt-headCol{
+    position: absolute;;
+    left: 0;
+    top: 0;
+    display: inline-block;
+    // padding-bottom: 10px;
+    background-color: $bgColor1;
+}
+.tt-wrapper{
     overflow-x: scroll;
     padding-bottom: 10px;
+    background-color: $bgColor1;
+}
+.tt-main{
+    padding-left: 75px;
 }
 .tt-dateList{
     border-bottom: 2px solid $darkColor1;
     background-color: $bgColor2;
     .tt-name, .tt-date{
+        line-height: 24px;
         padding: 2px 0;
     }
 }
@@ -48,4 +64,20 @@
     text-align: center;
     cursor: pointer;
     height: 22px;
+}
+
+.taskView{
+    padding: 10px;
+}
+.tv-list{
+    width: 100%;
+}
+.tv-item{
+    @extend %ui-font2;
+    float: left;
+    text-align: center;
+    cursor: pointer;
+    width: 200px;
+    border-radius: 3px;
+    margin: 2px;
 }
