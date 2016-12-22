@@ -31,5 +31,10 @@ body{
     background-color: $bgColor1;
     z-index: 20;
 }
+.g-dialog-L{
+    @extend .g-dialog;
+    left: 10%;
+    width: 80%;
+}
 .g-loading{
 }

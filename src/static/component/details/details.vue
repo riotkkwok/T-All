@@ -8,4 +8,15 @@ import { mapState, mapActions, mapMutations } from 'vuex'
 
 import * as myUtil from 'myUtil'
 
+export default {
+    data() {
+        return {};
+    },
+    computed: {
+        showDetails() {
+            return this.$store.commit('showDetails');
+        }
+    },
+    methods: 
+}
 </script>

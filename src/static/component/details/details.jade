@@ -1,0 +1,42 @@
+div.#details(v-show="showDetails")
+    div.g-mask
+    div.g-dialog-L
+        div.title
+            | {{ task.name }}
+        ul.info-wrapper
+            li.info-row
+                div.info-key
+                    | 参与人员
+                div.info-val
+                    div.info-val-row(v-for="ppl in task.asg")
+                        //- TODO
+            li.info-row
+                div.info-key
+                    | 项目经理
+                div.info-val
+                    | {{ task.pjm }}
+            li.info-row
+                div.info-key
+                    | 产品经理
+                div.info-val
+                    | {{ task.pdm }}
+            li.info-row
+                div.info-key
+                    | 美术设计
+                div.info-val
+                    | {{ task.dsg }}
+            li.info-row
+                div.info-key
+                    | web后端
+                div.info-val
+                    | {{ task.wbe }}
+            li.info-row
+                div.info-key
+                    | 测试人员
+                div.info-val
+                    | {{ task.tsr }}
+            li.info-row
+                div.info-key
+                    | 备注
+                div.info-val
+                    | {{ task.remark }}
