@@ -36,3 +36,11 @@ export const holidayList = (state) => {
 export const assigneeList = (state) => {
     return state.assigneeList;
 }
+
+export const showDetails = (state) => {
+    return state.showDetails;
+}
+
+export const detailedTask = (state) => {
+    return state.detailedTask;
+}

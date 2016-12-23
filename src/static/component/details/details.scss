@@ -1,0 +1,64 @@
+@charset "utf-8";
+
+@import "../../scss/theme.scss";
+
+.title{
+    @extend %ui-font1;
+    text-align: center;
+    padding: 4px;
+}
+
+.info-wrapper{
+    text-align: left;
+    padding: 5px;
+}
+.info-row{
+    padding: 3px 0;
+}
+.info-key{
+    @extend %ui-font2;
+    float: left;
+    font-weight: bold;
+    padding-right: 15px;
+}
+.info-val{
+    @extend %ui-font4;
+    float: left;
+    padding-left: 4px;
+}
+
+.ppl-info{
+    padding: 2px 0;
+}
+.ppl-info-name{
+    display: inline-block;
+    line-height: 24px;
+    vertical-align: top;
+    width: 75px;
+}
+.ppl-info-val{
+    display: inline-block;
+}
+.val-item{}
+
+.btn-section{
+    text-align: center;
+    padding: 10px 0;
+}
+.cancel-btn, .confirm-btn{
+    display: inline-block;
+    line-height: 30px;
+    cursor: pointer;
+    width: 30%;
+    border: 1px solid $mainColor;
+    border-radius: 3px;
+    margin: 0 10px;
+}
+.cancel-btn{
+    @extend %ui-font1;
+    color: $mainColor;
+}
+.confirm-btn{
+    @extend %ui-font1-rev;
+    background-color: $mainColor;
+}

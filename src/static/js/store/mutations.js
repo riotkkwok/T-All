@@ -13,3 +13,7 @@ export const showDetails = (state) => {
 export const hideDetails = (state) => {
     state.showDetails = false;
 }
+
+export const detailedTask = (state, t) => {
+    state.detailedTask = t;
+}

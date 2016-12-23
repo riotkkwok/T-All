@@ -6,6 +6,8 @@
 
         wTimeTable
 
+        wDetails
+
         wFooter
 </template>
 

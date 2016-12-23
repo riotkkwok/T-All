@@ -166,6 +166,17 @@ export default {
                 }
             }
             this.curTask = result;
+        },
+        viewDetail(tId) {
+            let t;
+            for(let i=0; i<this.taskList.length; i++){
+                if(this.taskList[i].id === tId){
+                    t = this.taskList[i];
+                    break;
+                }
+            }
+            this.$store.commit('detailedTask', t);
+            this.$store.commit('showDetails');
         }
     }
 };

@@ -26,5 +26,5 @@ div#timeTable
 
     div.taskView
         ul.tv-list.cf
-            li.tv-item(v-for="task in taskView", :style="{ backgroundColor: task.color }")
+            li.tv-item(v-for="task in taskView", :style="{ backgroundColor: task.color }" @click="viewDetail(task.id)")
                 | {{ task.name }}
