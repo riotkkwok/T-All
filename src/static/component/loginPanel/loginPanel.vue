@@ -59,7 +59,7 @@ export default {
             this.$store.dispatch('userLogin');
         },
         hideLoginPanel() {
-            this.$store.commit('hideLoginPanel');
+            this.$store.commit('showLoginPanel', false);
         }
     }
 };

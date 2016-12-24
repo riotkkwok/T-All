@@ -1,17 +1,9 @@
-export const showLoginPanel = (state) => {
-    state.showLoginPanel = true;
+export const showLoginPanel = (state, val) => {
+    state.showLoginPanel = !!val;
 }
 
-export const hideLoginPanel = (state) => {
-    state.showLoginPanel = false;
-}
-
-export const showDetails = (state) => {
-    state.showDetails = true;
-}
-
-export const hideDetails = (state) => {
-    state.showDetails = false;
+export const showDetails = (state, val) => {
+    state.showDetails = !!val;
 }
 
 export const detailedTask = (state, t) => {

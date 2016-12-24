@@ -176,7 +176,7 @@ export default {
                 }
             }
             this.$store.commit('detailedTask', t);
-            this.$store.commit('showDetails');
+            this.$store.commit('showDetails', true);
         }
     }
 };

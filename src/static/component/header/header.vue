@@ -89,7 +89,7 @@ module.exports = {
             this.showSettingsList = !this.showSettingsList;
         },
         loginClick() {
-            this.$store.commit('showLoginPanel');
+            this.$store.commit('showLoginPanel', true);
             this.showSettingsList = false;
         },
         logoutClick() {
