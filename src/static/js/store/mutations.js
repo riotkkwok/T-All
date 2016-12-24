@@ -17,3 +17,7 @@ export const hideDetails = (state) => {
 export const detailedTask = (state, t) => {
     state.detailedTask = t;
 }
+
+export const showEditor = (state, val) => {
+    state.showEditor = !!val;
+}

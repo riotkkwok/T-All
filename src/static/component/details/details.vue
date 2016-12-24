@@ -62,6 +62,11 @@ export default {
             return output;
         }
     },
+    data() {
+        return {
+            showEditBtn: this.$store.getters['isLogined'] && this.$store.getters['isAdmin']
+        }
+    },
     computed: {
         showDetails() {
             return this.$store.getters['showDetails'];
@@ -83,15 +88,19 @@ export default {
     },
     methods: {
         hideDetails() {
-            return this.$store.commit('hideDetails');
+            this.$store.commit('hideDetails');
         },
-        cancel() {
+        exitDetails() {
             this.hideDetails();
-            // TODO
+            this.$store.commit('detailedTask', null);
+        },
+        getBack() {
+           this.exitDetails(); 
         },
         edit() {
-            this.hideDetails();
-            // TODO
+            this.$store.commit('showEditor', this.$store.getters['detailedTask']);
+            this.$store.commit('showEditor', true);
+            this.exitDetails();
         }
     } 
 }

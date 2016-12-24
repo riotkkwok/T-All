@@ -2,8 +2,17 @@ export const loginInfo = (state) => {
     const user = state.userInfo;
     return {
         userName: user.userName,
-        userId: user.userId
+        userId: user.userId,
+        adminId: user.adminId
     }
+}
+
+export const isLogined = (state) => {
+    return !!loginInfo.userId;
+}
+
+export const isAdmin = (state) => {
+    return !!loginInfo.adminId;
 }
 
 export const showLoginPanel = (state) => {
