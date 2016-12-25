@@ -87,11 +87,8 @@ export default {
         }
     },
     methods: {
-        hideDetails() {
-            this.$store.commit('showDetails', false);
-        },
         exitDetails() {
-            this.hideDetails();
+            this.$store.commit('showDetails', false);
             this.$store.commit('detailedTask', null);
         },
         getBack() {
