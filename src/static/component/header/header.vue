@@ -40,23 +40,24 @@ a.logo {
 }
 .settings-list {
     position: absolute;
-    top: 40px;
+    top: 50px;
     right: 10px;
     width: 100px;
     border: 1px solid $color1;
     border-radius: 3px;
-    background-color: $bgColor2;
+    background-color: $bgColor1;
     cursor: pointer;
+    z-index: 5;
 }
 .settings-list:before {
     content: ' ';
     position: absolute;
-    top: -6px;
-    left: 47px;
-    border-top: 3px solid transparent;
-    border-right: 3px solid transparent;
-    border-bottom: 3px solid currentColor;
-    border-left: 3px solid transparent;
+    top: -20px;
+    right: 14px;
+    border-top: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid $color1;
+    border-left: 10px solid transparent;
 }
 .settings-item {
     @extend %ui-font1;
