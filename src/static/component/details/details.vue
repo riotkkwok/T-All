@@ -68,6 +68,14 @@ export default {
         }
     },
     computed: {
+        mode: {
+            set(val) {
+                this.$store.commit('mode', val);
+            },
+            get() {
+                return this.$store.getters['mode'];
+            }
+        },
         showDetails() {
             return this.$store.getters['showDetails'];
         },
@@ -84,6 +92,20 @@ export default {
                 }
             }
             return task;
+        },
+        task2() {
+            let task2 = this.$store.getters['editTask'],
+                asgList = this.$store.getters['assigneeList'];
+            if(!task2 || !task2.asg){
+                return {};
+            }
+            for(let i=0; i<task2.asg.length; i++){
+                for(let j=0; j<asgList.length; j++){
+                    if(task2.asg[i].id === asgList[j].id)
+                    task2.asg[i].name = asgList[j].name;
+                }
+            }
+            return task2;
         }
     },
     methods: {
@@ -92,12 +114,20 @@ export default {
             this.$store.commit('detailedTask', null);
         },
         getBack() {
-           this.exitDetails(); 
+            if(this.mode === 0){
+                this.exitDetails(); 
+            }else if(this.mode === 1){
+                this.mode = 0;
+                this.$store.commit('editTask', null);
+                // TODO
+            }
         },
         edit() {
-            this.$store.commit('showEditor', this.$store.getters['detailedTask']);
-            this.$store.commit('showEditor', true);
-            this.exitDetails();
+            this.$store.commit('editTask', this.$store.getters['detailedTask']);
+            this.mode = 1;
+        },
+        confirm() {
+            // TODO
         }
     } 
 }

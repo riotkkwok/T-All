@@ -1,51 +1,71 @@
-div#details(v-show="showDetails")
-    div.g-mask
-    div.g-dialog-L(v-if="!!task")
-        div.title
-            | {{ task.name }}
-        ul.info-wrapper
-            li.info-row.cf
-                div.info-key
-                    | 参与人员
-                div.info-val
+div#details(v-show="showDetails", :class=" mode === 1 ? 'editable' : '' ")
+    div.title
+        | {{ task.name }}
+    ul.info-wrapper
+        li.info-row.cf
+            div.info-key
+                | 参与人员
+            div.info-val
+                template(v-if="mode === 0")
                     ul.ppl-info(v-for="ppl in task.asg")
                         li.ppl-info-name
                             | {{ ppl.name }} 
                         li.ppl-info-val
                             div.val-item(v-for="(time, phase) in ppl.effort")
                                 | {{ phase | phaseToString }} {{ time | timeToString }}
-            li.info-row.cf
-                div.info-key
-                    | 项目经理
-                div.info-val
+                template(v-if="mode === 1")
+                    ul.ppl-info(v-for="ppl in task2.asg")
+                        li.ppl-info-name
+                            | {{ ppl.name }} 
+                        li.ppl-info-val
+                            div.val-item(v-for="(time, phase) in ppl.effort")
+                                | {{ phase | phaseToString }} {{ time | timeToString }}
+        li.info-row.cf
+            div.info-key
+                | 项目经理
+            div.info-val
+                span(v-show="mode === 0")
                     | {{ task.pjm }}
-            li.info-row.cf
-                div.info-key
-                    | 产品经理
-                div.info-val
+                input.nameInput(type="text", v-model="task2.pjm", placeholder="项目经理", v-show="mode === 1")
+        li.info-row.cf
+            div.info-key
+                | 产品经理
+            div.info-val
+                span(v-show="mode === 0")
                     | {{ task.pdm }}
-            li.info-row.cf
-                div.info-key
-                    | 美术设计
-                div.info-val
+                input.nameInput(type="text", v-model="task2.pdm", placeholder="产品经理", v-show="mode === 1")
+        li.info-row.cf
+            div.info-key
+                | 美术设计
+            div.info-val
+                span(v-show="mode === 0")
                     | {{ task.dsg }}
-            li.info-row.cf
-                div.info-key
-                    | web后端
-                div.info-val
+                input.nameInput(type="text", v-model="task2.dsg", placeholder="美术设计", v-show="mode === 1")
+        li.info-row.cf
+            div.info-key
+                | web后端
+            div.info-val
+                span(v-show="mode === 0")
                     | {{ task.wbe }}
-            li.info-row.cf
-                div.info-key
-                    | 测试人员
-                div.info-val
+                input.nameInput(type="text", v-model="task2.wbe", placeholder="web后端", v-show="mode === 1")
+        li.info-row.cf
+            div.info-key
+                | 测试人员
+            div.info-val
+                span(v-show="mode === 0")
                     | {{ task.tsr }}
-            li.info-row.cf
-                div.info-key
-                    | 备注
-                div.info-val
+                input.nameInput(type="text", v-model="task2.tsr", placeholder="测试人员", v-show="mode === 1")
+        li.info-row.cf
+            div.info-key.newline
+                | 备注
+            div.info-val.newline
+                span(v-show="mode === 0")
                     | {{ task.remark }}
-        div.btn-section
-            a.back-btn(@click="getBack")
-                | 返回
-            a.edit-btn(v-show="showEditBtn", @click="edit")
-                | 修改
+                textarea.remarkInput(type="text", v-model="task2.remark", placeholder="备注", resize="none", v-show="mode === 1")
+    div.btn-section
+        a.back-btn(@click="getBack")
+            | 返回
+        a.edit-btn(v-show="mode === 0", @click="edit")
+            | 修改
+        a.confirm-btn(v-show="mode === 1", @click="confirm")
+            | 确定
