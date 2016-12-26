@@ -1,3 +1,7 @@
+export const mode = (state) => {
+    return state.mode;
+}
+
 export const loginInfo = (state) => {
     const user = state.userInfo;
     return {
@@ -52,4 +56,8 @@ export const showDetails = (state) => {
 
 export const detailedTask = (state) => {
     return state.detailedTask;
+}
+
+export const editTask = (state) => {
+    return state.editTask;
 }

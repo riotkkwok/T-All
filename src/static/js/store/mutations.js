@@ -1,3 +1,9 @@
+import * as myUtil from 'myUtil'
+
+export const mode = (state, val) => {
+    state.mode = val;
+}
+
 export const showLoginPanel = (state, val) => {
     state.showLoginPanel = !!val;
 }
@@ -6,8 +12,12 @@ export const showDetails = (state, val) => {
     state.showDetails = !!val;
 }
 
-export const detailedTask = (state, t) => {
-    state.detailedTask = t;
+export const detailedTask = (state, obj) => {
+    state.detailedTask = myUtil.clone(obj);
+}
+
+export const editTask = (state, obj) => {
+    state.editTask = myUtil.clone(obj);
 }
 
 export const showEditor = (state, val) => {
