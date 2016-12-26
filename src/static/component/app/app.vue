@@ -22,7 +22,6 @@ export default {
     name: 'app',
     components: {
         wHeader,
-        // 'wEditor': require('../editor/editor.js'),
         wDetails,
         wTimeTable,
         wFooter,
