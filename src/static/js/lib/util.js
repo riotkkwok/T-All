@@ -28,3 +28,66 @@ export const logger = (...str) => {
     const d = new Date();
     console.log('[vuex-actions] '+myUtil.timeString(d)+' - '+str.join(' , '));
 }
+
+export const clone = (obj) => {
+    const cloneObj = (o) => {
+        const newO = {};
+        for(let key in o){
+            switch(getType(o[key])){
+                case 'object': {
+                    newO[key] = clone(o[key]);
+                    break;
+                }
+                case 'array': {
+                    newO[key] = clone(o[key]);
+                    break;
+                }
+                default: {
+                    newO[key] = o[key];
+                }
+            }
+        }
+        return newO;
+    }
+
+    const cloneArray = (o) => {
+        const newO = [];
+        for(let i=0;  i<o.length; i++){
+            switch(getType(o[i])){
+                case 'object': {
+                    newO[i] = clone(o[i]);
+                    break;
+                }
+                case 'array': {
+                    newO[i] = clone(o[i]);
+                    break;
+                }
+                default: {
+                    newO[i] = o[i];
+                }
+            }
+        }
+        return newO;
+    }
+    
+    let newObj;
+    switch(getType(obj)){
+        case 'object': {
+            newObj = cloneObj(obj);
+            break;
+        }
+        case 'array': {
+            newObj = cloneArray(obj);
+            break;
+        }
+        default: {
+            newObj = obj;
+        }
+    }
+
+    return newObj;
+}
+
+export const getType = (o) => {
+    return Object.prototype.toString.call(o).toLowerCase().replace(/(\[object )|(\])/g, '');
+}

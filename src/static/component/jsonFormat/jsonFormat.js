@@ -1,3 +1,4 @@
+import * as myUtil from 'myUtil'
 import resp from 'resp';
 
 const types = {
@@ -16,10 +17,10 @@ const check = (r, o, ko) => {
     }
     for(let k in r){
         if(o.hasOwnProperty(k)){
-            if(getType(r[k]) === getType(o[k])){
-                if(getType(r[k]) === types.obj){
+            if(myUtil.getType(r[k]) === myUtil.getType(o[k])){
+                if(myUtil.getType(r[k]) === types.obj){
                     result[k] = check(r[k], o[k]);
-                }else if(getType(r[k]) === types.arr){
+                }else if(myUtil.getType(r[k]) === types.arr){
                     result[k] = check4Array(r[k], o[k]);
                 }else{
                     result[k] = o[k];
@@ -41,13 +42,13 @@ const check4Array = (r, o) => {
         return o;
     }
     for(let i=0, j=0; i<o.length; i++){
-        if(getType(r[0]) === getType(o[i])){
-            if(getType(o[i]) === types.obj){
+        if(myUtil.getType(r[0]) === myUtil.getType(o[i])){
+            if(myUtil.getType(o[i]) === types.obj){
                 tmp = check(r[0], o[i])
                 if(tmp !== undefined){
                     result[j++] = tmp;
                 }
-            }else if(getType(o[i]) === types.arr){
+            }else if(myUtil.getType(o[i]) === types.arr){
                 tmp = check4Array(r[0], o[i]);
                 if(tmp !== undefined){
                     result[j++] = tmp;
@@ -63,10 +64,6 @@ const check4Array = (r, o) => {
         result = undefined;
     }
     return result;
-}
-
-const getType = (o) => {
-    return Object.prototype.toString.call(o).toLowerCase().replace(/(\[object )|(\])/g, '');
 }
 
 export const validate = (name, o) => {
