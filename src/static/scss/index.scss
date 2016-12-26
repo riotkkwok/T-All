@@ -8,6 +8,13 @@ body{
     font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
 }
 
+#app{
+    box-sizing: border-box;
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 62px;
+}
+
 .g-mask{
     position: fixed;
     top: 0;

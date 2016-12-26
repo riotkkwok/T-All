@@ -8,7 +8,7 @@
 
 footer{
     @extend %ui-font4;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     text-align: center;
