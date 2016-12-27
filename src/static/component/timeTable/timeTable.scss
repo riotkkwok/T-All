@@ -3,7 +3,13 @@
 @import "../../scss/theme.scss";
 
 #timeTable{
-    padding: 5px 10px;
+    margin: 5px;
+    padding: 5px;
+    &.editable{
+        box-shadow: 0 0 5px $bColor2;
+        border: 1px solid $bColor2;
+        border-radius: 5px;
+    }
 }
 
 .filterBox{

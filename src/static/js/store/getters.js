@@ -61,3 +61,7 @@ export const detailedTask = (state) => {
 export const editTask = (state) => {
     return state.editTask;
 }
+
+export const showEditingToast = (state) => {
+    return state.showEditingToast;
+}

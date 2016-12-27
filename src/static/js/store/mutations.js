@@ -20,6 +20,6 @@ export const editTask = (state, obj) => {
     state.editTask = myUtil.clone(obj);
 }
 
-export const showEditor = (state, val) => {
-    state.showEditor = !!val;
+export const showEditingToast = (state, val) => {
+    state.showEditingToast = !!val;
 }

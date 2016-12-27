@@ -1,4 +1,4 @@
-div#timeTable
+div#timeTable(:class=" mode === 1 ? 'editable' : '' ")
     div.filterBox
 
     div.tt-container
@@ -28,3 +28,9 @@ div#timeTable
         ul.tv-list.cf
             li.tv-item(v-for="task in taskView", :style="{ backgroundColor: task.color }" @click="viewDetail(task.id)")
                 | {{ task.name }}
+
+    div#editingToast(v-show="showEditingToast")
+        div.g-mask
+        div.g-dialog
+            div.msg 当前正在编辑，请返回后再次点击查看详情
+

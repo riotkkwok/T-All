@@ -118,6 +118,12 @@ export default {
             get(){
                 return this.curTask;
             }
+        },
+        showEditingToast() {
+            return this.$store.getters['showEditingToast'];
+        },
+        mode() {
+            return this.$store.getters['mode'];
         }
     },
     methods: {
@@ -169,6 +175,14 @@ export default {
         },
         viewDetail(tId) {
             let t;
+            const that = this;
+            if(this.$store.getters['showDetails'] && this.$store.getters['mode'] === 1){
+                this.$store.commit('showEditingToast', true);
+                setTimeout(function(){
+                    that.$store.commit('showEditingToast', false);
+                }, 3000);
+                return;
+            }
             for(let i=0; i<this.taskList.length; i++){
                 if(this.taskList[i].id === tId){
                     t = this.taskList[i];
