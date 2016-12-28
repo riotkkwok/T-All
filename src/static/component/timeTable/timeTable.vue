@@ -14,7 +14,6 @@ const createPList = (asignees, dates) => {
     for(let i=0; i<asignees.length; i++){
         pplList[asignees[i].id] = ppl = {
             name: asignees[i].name,
-            leaveType: null
         };
         for(let j=0; j<dates.length; j++){
             ppl[dates[j].dateStr] = [{
@@ -25,6 +24,8 @@ const createPList = (asignees, dates) => {
                 id: null,
                 stage: null,
                 color: 'transparent'
+            },{
+                leaveType: null
             }];
         }
     }
@@ -202,8 +203,12 @@ export default {
         },
         selectTask(t) {
             if(t.id === null){
-                if(this.$store.getters['isAdmin'] && this.mode === 0){
-                    this.$store.commit('showAddTaskDialog', true);
+                if(this.$store.getters['isAdmin']){
+                    if(this.mode === 0){
+                        this.$store.commit('showAddTaskDialog', true);  
+                    }else if(this.mode === 1){
+                        ;
+                    }
                 }
             }else{
                 this.viewDetail(t.id);
