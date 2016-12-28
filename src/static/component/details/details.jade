@@ -65,7 +65,7 @@ div#details(v-show="showDetails", :class=" mode === 1 ? 'editable' : '' ")
     div.btn-section
         button.back-btn(@click="goBack")
             | 返回
-        button.edit-btn(v-show="mode === 0", @click="edit")
+        button.edit-btn(v-show="mode === 0 && !!isAdmin", @click="edit")
             | 修改
-        button.confirm-btn(v-show="mode === 1", @click="confirm")
+        button.confirm-btn(v-show="mode === 1 && !!isAdmin", @click="confirm")
             | 确定

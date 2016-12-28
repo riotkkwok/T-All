@@ -106,6 +106,9 @@ export default {
                 }
             }
             return task2;
+        },
+        isAdmin() {
+            return this.$store.getters['isAdmin'];
         }
     },
     methods: {
