@@ -122,8 +122,16 @@ export default {
         showEditingToast() {
             return this.$store.getters['showEditingToast'];
         },
-        mode() {
-            return this.$store.getters['mode'];
+        showAddTaskDialog() {
+            return this.$store.getters['showAddTaskDialog'];
+        },
+        mode: {
+            set(val) {
+                this.$store.commit('mode', val);
+            },
+            get() {
+                return this.$store.getters['mode'];
+            }
         }
     },
     methods: {
@@ -191,6 +199,24 @@ export default {
             }
             this.$store.commit('detailedTask', t);
             this.$store.commit('showDetails', true);
+        },
+        selectTask(t) {
+            if(t.id === null){
+                if(this.$store.getters['isAdmin'] && this.mode === 0){
+                    this.$store.commit('showAddTaskDialog', true);
+                }
+            }else{
+                this.viewDetail(t.id);
+            }
+        },
+        goBack() {
+            this.$store.commit('showAddTaskDialog', false);
+        },
+        addTask() {
+            this.$store.commit('showAddTaskDialog', false);
+            this.$store.commit('showDetails', true);
+            this.mode = 1;
+            this.$store.commit('editTask', {});
         }
     }
 };

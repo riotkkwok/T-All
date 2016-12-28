@@ -23,3 +23,7 @@ export const editTask = (state, obj) => {
 export const showEditingToast = (state, val) => {
     state.showEditingToast = !!val;
 }
+
+export const showAddTaskDialog = (state, val) => {
+    state.showAddTaskDialog = !!val;
+}

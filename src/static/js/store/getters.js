@@ -12,11 +12,11 @@ export const loginInfo = (state) => {
 }
 
 export const isLogined = (state) => {
-    return !!loginInfo.userId;
+    return !!loginInfo(state).userId;
 }
 
 export const isAdmin = (state) => {
-    return !!loginInfo.adminId;
+    return !!loginInfo(state).adminId;
 }
 
 export const showLoginPanel = (state) => {
@@ -64,4 +64,8 @@ export const editTask = (state) => {
 
 export const showEditingToast = (state) => {
     return state.showEditingToast;
+}
+
+export const showAddTaskDialog = (state) => {
+    return state.showAddTaskDialog;
 }
