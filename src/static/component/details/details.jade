@@ -1,6 +1,8 @@
 div#details(v-show="showDetails", :class=" mode === 1 ? 'editable' : '' ")
     div.title
-        | {{ task.name }}
+        span(v-show="mode === 0")
+            | {{ task.name }}
+        input.nameInput(type="text", v-model="task2.name", placeholder="需求名", v-show="mode === 1")
     ul.info-wrapper
         li.info-row.cf
             div.info-key

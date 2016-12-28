@@ -27,6 +27,9 @@
     @extend %ui-font1;
     text-align: center;
     padding: 4px;
+    .nameInput{
+        text-align: center;
+    }
 }
 
 .info-wrapper{

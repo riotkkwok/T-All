@@ -115,13 +115,18 @@ export default {
         exitDetails() {
             this.$store.commit('showDetails', false);
             this.$store.commit('detailedTask', null);
+            this.$store.commit('editTask', null);
         },
         goBack() {
             if(this.mode === 0){
                 this.exitDetails(); 
             }else if(this.mode === 1){
-                this.mode = 0;
                 this.$store.commit('editTask', null);
+                if(this.$store.getters['detailedTask'] === null){
+                    this.exitDetails();
+                }else{
+                    this.mode = 0;
+                }
                 // TODO
             }
         },
