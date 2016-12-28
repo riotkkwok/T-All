@@ -113,7 +113,7 @@ export default {
             this.$store.commit('showDetails', false);
             this.$store.commit('detailedTask', null);
         },
-        getBack() {
+        goBack() {
             if(this.mode === 0){
                 this.exitDetails(); 
             }else if(this.mode === 1){
