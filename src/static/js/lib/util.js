@@ -26,7 +26,7 @@ export const addToList = (obj, key, val) => {
 
 export const logger = (...str) => {
     const d = new Date();
-    console.log('[vuex-actions] '+myUtil.timeString(d)+' - '+str.join(' , '));
+    console.log('[vuex-actions] '+timeString(d)+' - '+str.join(' , '));
 }
 
 export const clone = (obj) => {

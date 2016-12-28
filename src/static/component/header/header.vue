@@ -2,7 +2,8 @@
 header
     a.logo(href="javascript:void(0);" @click="logoClick")
     a#settings(@click="settingsClick" v-show="isLoginStatusReady") 设置
-    div#username(@click="loginClick") 游客
+    div#username(@click="loginClick") 
+        | {{ username || '游客' }}
     ul.settings-list(v-show="showSettingsList")
         li.settings-item(v-show="!isLogined" @click="loginClick") 登录
         li.settings-item(v-show="isLogined" @click="logoutClick") 退出
@@ -71,15 +72,16 @@ import { mapGetters, mapActions, mapMutations } from 'vuex'
 module.exports = {
     data(){
         return {
-            showSettingsList: false
+            showSettingsList: false,
+            username: this.$store.getters['loginInfo'].userName
         }
     },
     computed: {
         isLoginStatusReady() {
-            return !!mapGetters(['loginInfo']);
+            return !!this.$store.getters['loginInfo'];
         },
         isLogined() {
-            return this.isLoginStatusReady && !!mapGetters(['loginInfo']).userName;
+            return this.isLoginStatusReady && !!this.$store.getters['loginInfo'].userName;
         }
     },
     methods: {
@@ -90,6 +92,9 @@ module.exports = {
             this.showSettingsList = !this.showSettingsList;
         },
         loginClick() {
+            if(this.isLogined){
+                return;
+            }
             this.$store.commit('showLoginPanel', true);
             this.showSettingsList = false;
         },
