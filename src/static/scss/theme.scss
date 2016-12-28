@@ -61,3 +61,13 @@ $fontColor4: rgba(255,255,255, 0.75) !default;
     font-size: 14px;
     line-height: 22px;
 }
+
+%ui-btn{
+    @extend %ui-font1-rev;
+    background-color: $mainColor;
+}
+%ui-btn2{
+    @extend %ui-font1;
+    color: $mainColor;
+    background-color: $bgColor1;
+}

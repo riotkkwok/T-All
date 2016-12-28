@@ -63,9 +63,9 @@ div#details(v-show="showDetails", :class=" mode === 1 ? 'editable' : '' ")
                     | {{ task.remark }}
                 textarea.remarkInput(type="text", v-model="task2.remark", placeholder="备注", resize="none", v-show="mode === 1")
     div.btn-section
-        a.back-btn(@click="getBack")
+        button.back-btn(@click="getBack")
             | 返回
-        a.edit-btn(v-show="mode === 0", @click="edit")
+        button.edit-btn(v-show="mode === 0", @click="edit")
             | 修改
-        a.confirm-btn(v-show="mode === 1", @click="confirm")
+        button.confirm-btn(v-show="mode === 1", @click="confirm")
             | 确定
