@@ -88,6 +88,30 @@ export const clone = (obj) => {
     return newObj;
 }
 
+export const reversePlainObject = (o, dest, dupHandleType) => {
+    let result = {};
+    for(let key in o){
+        if(/array|function|object/.test(getType(o[key]))){
+            continue;
+        }
+        if(result.hasOwnProperty(o[key])){
+            if(dupHandleType.toLowerCase() === 'array'){
+                result[o[key]] = [].concat(result[o[key]]).concat(key);
+            }else if(dupHandleType.toLowerCase() === 'string'){
+                result[o[key]] += ','+key;
+            }
+        }else{
+            result[o[key]] = key;
+        }
+    }
+    for(let key in result){
+        if(dest.hasOwnProperty(key)){
+            continue;
+        }
+        dest[key] = result[key];
+    }
+}
+
 export const getType = (o) => {
     return Object.prototype.toString.call(o).toLowerCase().replace(/(\[object )|(\])/g, '');
 }
