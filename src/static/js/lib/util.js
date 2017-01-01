@@ -91,24 +91,36 @@ export const clone = (obj) => {
 export const reversePlainObject = (o, dest, dupHandleType) => {
     let result = {};
     for(let key in o){
-        if(/array|function|object/.test(getType(o[key]))){
+        if(/function|object/.test(getType(o[key]))){
+            continue;
+        }else if(getType(o[key]) === 'array'){
+            for(let i=0; i<o[key].length; i++){
+                if(/array|function|object/.test(getType(o[key][i]))){
+                    continue;
+                }
+                keyValReverse(key, o[key][i]);
+            }
             continue;
         }
-        if(result.hasOwnProperty(o[key])){
-            if(dupHandleType.toLowerCase() === 'array'){
-                result[o[key]] = [].concat(result[o[key]]).concat(key);
-            }else if(dupHandleType.toLowerCase() === 'string'){
-                result[o[key]] += ','+key;
-            }
-        }else{
-            result[o[key]] = key;
-        }
+        keyValReverse(key, o[key]);
     }
     for(let key in result){
         if(dest.hasOwnProperty(key)){
             continue;
         }
         dest[key] = result[key];
+    }
+
+    function keyValReverse(key, val){
+        if(result.hasOwnProperty(val)){
+            if(dupHandleType.toLowerCase() === 'array'){
+                result[val] = [].concat(result[val]).concat(key);
+            }else if(dupHandleType.toLowerCase() === 'string'){
+                result[val] += ','+key;
+            }
+        }else{
+            result[val] = key;
+        }
     }
 }
 
