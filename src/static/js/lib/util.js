@@ -16,9 +16,13 @@ export const timeString = (d) => {
     return (d.getHours()+':'+d.getMinutes()+':'+d.getSeconds()).replace(/\b([0-9]{1})\b/g, '0$1')
 }
 
-export const addToList = (obj, key, val) => {
+export const addToList = (obj, key, val, filterDupl) => {
     if(obj.hasOwnProperty(key)){
-        obj[key].push(val);
+        if(!!filterDupl && obj[key].indexOf(val) >= 0){
+            // do nothing
+        }else{
+            obj[key].push(val);
+        }
     }else{
         obj[key] = [val];
     }
