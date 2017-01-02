@@ -1,3 +1,5 @@
+import * as myUtil from 'myUtil'
+
 export const mode = (state) => {
     return state.mode;
 }
@@ -55,11 +57,11 @@ export const showDetails = (state) => {
 }
 
 export const detailedTask = (state) => {
-    return state.detailedTask;
+    return myUtil.clone(state.detailedTask);
 }
 
 export const editTask = (state) => {
-    return state.editTask;
+    return myUtil.clone(state.editTask);
 }
 
 export const showEditingToast = (state) => {
