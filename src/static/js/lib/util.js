@@ -28,9 +28,22 @@ export const addToList = (obj, key, val, filterDupl) => {
     }
 }
 
-export const logger = (...str) => {
+export const logger = (strs, type) => {
     const d = new Date();
-    console.log('[vuex-actions] '+timeString(d)+' - '+str.join(' , '));
+    let t;
+    switch(type){
+        case 'a': t = '[vuex-actions] '; break;
+        case 'c': t = '[vue-component-computed] '; break;
+        case 'd': t = '[vue-component-data] '; break;
+        case 'f': t = '[vue-filters] '; break;
+        case 'g': t = '[vuex-getters] '; break;
+        case 'me': t = '[vue-component-methods] '; break;
+        case 'm': t = '[vue-component-mounted] '; break;
+        case 'mu': t = '[vuex-mutations] '; break;
+        case 'w': t = '[vue-component-watch] '; break;
+        default: '[] ';
+    }
+    console.log(t+timeString(d)+' - '+strs.join(' , '));
 }
 
 export const clone = (obj) => {
