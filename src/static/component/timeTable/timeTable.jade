@@ -18,9 +18,15 @@ div#timeTable(:class=" mode === 1 ? 'editable' : '' ")
                     li.tt-date(v-for="date in dateList")
                         ul.tt-task(v-if="!ppl[date.dateStr] || !ppl[date.dateStr].leaveType")
                             li.tt-taskItem(@click="selectTask(ppl[date.dateStr][0])", :style="{ backgroundColor: ppl[date.dateStr][0].color }")
-                                | {{ ppl[date.dateStr][0].stage }}
+                                template(v-if="ppl[date.dateStr][0].editable")
+                                    input.stageInput(v-model="daylyWork", @input="updateTask(ppl.id, ppl.name, date.dateStr, 0)", @blur="unselectTask", v-focus="autoFocusInput")
+                                template(v-else)
+                                    | {{ ppl[date.dateStr][0].stage }}
                             li.tt-taskItem(@click="selectTask(ppl[date.dateStr][1])", :style="{ backgroundColor: ppl[date.dateStr][1].color }")
-                                | {{ ppl[date.dateStr][1].stage }}
+                                template(v-if="ppl[date.dateStr][1].editable")
+                                    input.stageInput(v-model="daylyWork", @input="updateTask(ppl.id, ppl.name, date.dateStr, 1)", @blur="unselectTask", v-focus="autoFocusInput")
+                                template(v-else)
+                                    | {{ ppl[date.dateStr][1].stage }}
                         div.tt-leave(v-if="ppl[date.dateStr] && ppl[date.dateStr][2].leaveType", @click="")
                             | {{ ppl[date.dateStr][2].leaveType }}
 

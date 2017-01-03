@@ -7,23 +7,27 @@ import Vue from 'vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 import * as myUtil from 'myUtil'
+import * as vFilters from 'viewFilters'
 
-const createPList = (asignees, dates) => {
+const createPList = (assignees, dates) => {
     const pplList = {};
     let ppl;
-    for(let i=0; i<asignees.length; i++){
-        pplList[asignees[i].id] = ppl = {
-            name: asignees[i].name,
+    for(let i=0; i<assignees.length; i++){
+        pplList[assignees[i].id] = ppl = {
+            name: assignees[i].name,
+            id: assignees[i].id
         };
         for(let j=0; j<dates.length; j++){
             ppl[dates[j].dateStr] = [{
                 id: null,
                 stage: null,
-                color: 'transparent'
+                color: 'transparent',
+                editable: false
             },{
                 id: null,
                 stage: null,
-                color: 'transparent'
+                color: 'transparent',
+                editable: false
             },{
                 leaveType: null
             }];
@@ -40,10 +44,12 @@ const pushTask = (tList, tId) => {
 
 export default {
     mounted() {
+        this.pplList = this.runPplList();
         this.needRender = true;
         window.onresize = this.visibleArea;
         this.visibleArea();
     },
+    filters: vFilters,
     data(){
         return {
             startDate: this.$store.getters['startDate'],
@@ -52,7 +58,11 @@ export default {
             taskList: this.$store.getters['taskList'],
             needRender: false,
             scrolling: false,
-            curTask: []
+            curTask: [],
+            daylyWork: '',
+            lastEditDay: null,
+            pplList: {},
+            autoFocusInput: true,
         };
     },
     computed: {
@@ -87,30 +97,41 @@ export default {
             }
             return dList;
         },
-        pplList() {
-            const pplList = createPList(this.$store.getters['assigneeList'], this.dateList);
-            let task, ppl, eff, i, j, k;
-            for(i=0; i<this.taskList.length; i++){
-                task = this.taskList[i];
-                for(j=0; j<task.asg.length; j++){ // 遍历参与人
-                    ppl = pplList[task.asg[j].id];
-                    eff = task.asg[j].effort;
-                    for(let key in eff){ // 遍历工作阶段
-                        for(k=0; k<eff[key].length; k++){ // 遍历每阶段的工作日期
-                            if(ppl[eff[key][k]][task.nth].id !== null){
-                                console.error("Multi-tasks in the same place.");
-                            }else{
-                                ppl[eff[key][k]][task.nth] = {
-                                    id: task.id,
-                                    stage: key,
-                                    color: task.color
-                                };
-                            }
+        // pplList2() {
+        //     return myUtil.clone(this.pplList);
+        // },
+        editTask() {
+            console.log('get editTask');
+            return this.$store.getters['editTask'];
+        },
+        taskAsg: {
+            get() {
+                let taskAsg = {}, editTask = this.editTask,
+                    asgList = this.$store.getters['assigneeList'];
+                if(this.mode !== 1 || !editTask){
+                    return {};
+                }
+                for(let i=0; i<editTask.asg.length; i++){
+                    taskAsg[editTask.asg[i].id] = {
+                        name: editTask.asg[i].name,
+                        id: editTask.asg[i].id
+                    };
+                    myUtil.reversePlainObject(editTask.asg[i].effort, taskAsg[editTask.asg[i].id]);
+                }
+                console.log(taskAsg);
+                for(let j=0; j<asgList.length; j++){
+                    if(!taskAsg[asgList[j].id]){
+                        taskAsg[asgList[j].id] = {
+                            name: asgList[j].name,
+                            id: asgList[j].id
                         }
                     }
                 }
+                return taskAsg;
+            },
+            set(ta) {
+                let taskAsg = {}, editTask = this.$store.getters['editTask'];
             }
-            return pplList;
         },
         taskView: {
             set(ls){
@@ -135,7 +156,76 @@ export default {
             }
         }
     },
+    watch: {
+        lastEditDay(val) {
+            this.pplList = this.runPplList(val);
+        }
+    },
+    directives: {
+        focus: {
+            inserted: function (el, {value}) {
+                if (value) {
+                    el.focus();
+                }
+            }
+        }
+    },
     methods: {
+        runPplList(lastT) {
+            console.log('runPplList');
+            let task, ppl, eff, i, j, k;
+            if(!!lastT){
+                console.log('old');
+                const pplListExist = this.pplList;
+                // 追加正在编辑
+                if(this.$store.getters['isAdmin'] && this.mode === 1 && !!this.editTask){
+                    let editTask = this.editTask;
+                    // 遍历编辑中任务的参与人
+                    for(i=0; i<editTask.asg.length; i++){
+                        ppl = editTask.asg[i];
+                        eff = editTask.asg[i].effort;
+                        // 遍历工作阶段
+                        for(let key in eff){
+                            // 遍历每阶段的工作日期
+                            for(let j=0; j<eff[key].length; j++){
+                                k = pplListExist[ppl.id][eff[key][j]][ppl.nth];
+                                k.id = editTask.id;
+                                k.color = editTask.color;
+                                k.stage = key;
+                            }
+                        }
+                    }
+                }
+                console.log(pplListExist);
+                return pplListExist;
+            }
+            const pplList = createPList(this.$store.getters['assigneeList'], this.dateList);
+            // 遍历任务列表
+            for(i=0; i<this.taskList.length; i++){
+                task = this.taskList[i];
+                // 遍历参与人
+                for(j=0; j<task.asg.length; j++){
+                    ppl = pplList[task.asg[j].id];
+                    eff = task.asg[j].effort;
+                    // 遍历工作阶段
+                    for(let key in eff){
+                        // 遍历每阶段的工作日期
+                        for(k=0; k<eff[key].length; k++){
+                            if(ppl[eff[key][k]][task.asg[j].nth].id !== null){
+                                console.error("Multi-tasks in the same place.");
+                            }else{
+                                ppl[eff[key][k]][task.asg[j].nth] = {
+                                    id: task.id,
+                                    stage: key,
+                                    color: task.color
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+            return pplList;
+        },
         delayScroll(fn) {
             const that = this;
             if(!!that.scrolling){
@@ -185,7 +275,7 @@ export default {
         viewDetail(tId) {
             let t;
             const that = this;
-            if(this.$store.getters['showDetails'] && this.$store.getters['mode'] === 1){
+            if(this.$store.getters['showDetails'] && this.mode === 1){
                 this.$store.commit('showEditingToast', true);
                 setTimeout(function(){
                     that.$store.commit('showEditingToast', false);
@@ -202,16 +292,37 @@ export default {
             this.$store.commit('showDetails', true);
         },
         selectTask(t) {
-            if(t.id === null){
+            console.log('selectTask');
+            if(!!t.editable && t === this.lastEditDay){
+                return;
+            }
+            if(t.id === null || (this.editTask && t.id === this.editTask.id)){
                 if(this.$store.getters['isAdmin']){
                     if(this.mode === 0){
                         this.$store.commit('showAddTaskDialog', true);  
                     }else if(this.mode === 1){
-                        ;
+                        if(!t.editable){ // 不是正在编辑
+                            this.daylyWork = t.stage || '';
+                            if(!!this.lastEditDay){
+                                this.lastEditDay.editable = false;
+                            }
+                            t.editable = true;
+                            this.lastEditDay = t;
+                        }
                     }
                 }
             }else{
                 this.viewDetail(t.id);
+            }
+        },
+        unselectTask() {
+            console.log('unselectTask');
+            if(this.$store.getters['isAdmin'] && this.mode === 1){
+                this.daylyWork = '';
+                if(!!this.lastEditDay){
+                    this.lastEditDay.editable = false;
+                }
+                this.lastEditDay = {};
             }
         },
         goBack() {
@@ -222,7 +333,29 @@ export default {
             this.$store.commit('showDetails', true);
             this.mode = 1;
             this.$store.commit('editTask', {});
-        }
+        },
+        updateTask(pplId, pplName, dateStr, nth) {
+            console.log('updateTask');
+            let editTask = this.editTask;
+            for(let i=0; i<editTask.asg.length; i++){
+                if(editTask.asg[i].id === pplId){
+                    break;
+                }
+                if(i+1 === editTask.asg.length){
+                    myUtil.addToList(editTask, 'asg', {
+                        id: pplId,
+                        name: pplName
+                    });
+                }
+            }
+            for(let i=0; i<editTask.asg.length; i++){
+                if(editTask.asg[i].id === pplId && editTask.asg[i].effort.hasOwnProperty(this.daylyWork)){
+                    myUtil.addToList(editTask.asg[i].effort, this.daylyWork, dateStr, true);
+                    break;
+                }
+            }
+            this.$store.commit('editTask', editTask);
+        },
     }
 };
 
