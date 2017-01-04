@@ -85,6 +85,7 @@ module.exports = {
             'footer': path.join(__dirname, path.component, 'footer/footer.vue'),
             'loginPanel': path.join(__dirname, path.component, 'loginPanel/loginPanel.vue'),
             'myUtil': path.join(__dirname, path.lib, 'util.js'),
+            'viewFilters': path.join(__dirname, path.lib, 'viewFilters.js'),
         },
         publicPath: '/'
     },
