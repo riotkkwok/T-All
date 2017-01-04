@@ -7,7 +7,7 @@ import Vue from 'vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 import * as myUtil from 'myUtil'
-import * as vFilters from 'viewFilters'
+import { stageList } from 'staticInfo'
 
 const createPList = (assignees, dates) => {
     const pplList = {};
@@ -49,7 +49,6 @@ export default {
         window.onresize = this.visibleArea;
         this.visibleArea();
     },
-    filters: vFilters,
     data(){
         return {
             startDate: this.$store.getters['startDate'],
@@ -292,8 +291,11 @@ export default {
             this.$store.commit('showDetails', true);
         },
         selectTask(t) {
-            console.log('selectTask');
+            // console.log('selectTask');
             if(!!t.editable && t === this.lastEditDay){
+                return;
+            }
+            if(false){ // TODO － 若已参与者位置不一致则忽略
                 return;
             }
             if(t.id === null || (this.editTask && t.id === this.editTask.id)){
@@ -316,7 +318,7 @@ export default {
             }
         },
         unselectTask() {
-            console.log('unselectTask');
+            // console.log('unselectTask');
             if(this.$store.getters['isAdmin'] && this.mode === 1){
                 this.daylyWork = '';
                 if(!!this.lastEditDay){
@@ -336,23 +338,52 @@ export default {
         },
         updateTask(pplId, pplName, dateStr, nth) {
             console.log('updateTask');
-            let editTask = this.editTask;
-            for(let i=0; i<editTask.asg.length; i++){
-                if(editTask.asg[i].id === pplId){
-                    break;
+            let editTask = this.editTask, index;
+            console.log(stageList);
+            if(stageList.indexOf(this.daylyWork) < 0){ // 非法阶段值
+                for(let i=0; i<editTask.asg.length; i++){ // 遍历查找项目参与者
+                    if(editTask.asg[i].id === pplId){
+                        let isEngaged = false, 
+                            eff = editTask.asg[i].effort,
+                            j;
+                        for(let s in eff){ // 遍历阶段找到当前编辑日期
+                            j = eff[s].indexOf(dateStr);
+                            if(j >= 0){
+                                // 删除当前日期
+                                console.log('remove date');
+                                eff[s].splice(j, 1);
+                            }
+                            if(eff[s].length>0){ // 还有其他日期参与项目
+                                isEngaged = true;
+                                break;
+                            }
+                        }
+                        if(!isEngaged){
+                            // 没有其他日期参与项目，移除参与者
+                            console.log('remove asg');
+                            editTask.asg.splice(i, 1);
+                        }
+                        break;
+                    }
                 }
-                if(i+1 === editTask.asg.length){
-                    myUtil.addToList(editTask, 'asg', {
-                        id: pplId,
-                        name: pplName
-                    });
+            }else{ // 合法阶段值
+                // 添加未参与项目的参与者
+                for(let i=0; i<editTask.asg.length; i++){
+                    if(editTask.asg[i].id === pplId){
+                        index = i;
+                        break;
+                    }
+                    if(i+1 === editTask.asg.length){
+                        myUtil.addToList(editTask, 'asg', {
+                            id: pplId,
+                            name: pplName,
+                            effort: {},
+                            nth: nth
+                        });
+                        index = i + 1;
+                    }
                 }
-            }
-            for(let i=0; i<editTask.asg.length; i++){
-                if(editTask.asg[i].id === pplId && editTask.asg[i].effort.hasOwnProperty(this.daylyWork)){
-                    myUtil.addToList(editTask.asg[i].effort, this.daylyWork, dateStr, true);
-                    break;
-                }
+                myUtil.addToList(editTask.asg[index].effort, this.daylyWork, dateStr, true);
             }
             this.$store.commit('editTask', editTask);
         },
