@@ -1,0 +1,1 @@
+export const stageList = ['dev', 'intg', 'test', 'rls'];
