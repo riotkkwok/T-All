@@ -96,11 +96,7 @@ export default {
             }
             return dList;
         },
-        // pplList2() {
-        //     return myUtil.clone(this.pplList);
-        // },
         editTask() {
-            console.log('get editTask');
             return this.$store.getters['editTask'];
         },
         taskAsg: {
@@ -117,7 +113,6 @@ export default {
                     };
                     myUtil.reversePlainObject(editTask.asg[i].effort, taskAsg[editTask.asg[i].id]);
                 }
-                console.log(taskAsg);
                 for(let j=0; j<asgList.length; j++){
                     if(!taskAsg[asgList[j].id]){
                         taskAsg[asgList[j].id] = {
@@ -171,10 +166,9 @@ export default {
     },
     methods: {
         runPplList(lastT) {
-            console.log('runPplList');
+            myUtil.logger(['runPplList'], 'me');
             let task, ppl, eff, i, j, k;
             if(!!lastT){
-                console.log('old');
                 const pplListExist = this.pplList;
                 // 追加正在编辑
                 if(this.$store.getters['isAdmin'] && this.mode === 1 && !!this.editTask){
@@ -195,7 +189,6 @@ export default {
                         }
                     }
                 }
-                console.log(pplListExist);
                 return pplListExist;
             }
             const pplList = createPList(this.$store.getters['assigneeList'], this.dateList);
@@ -216,7 +209,8 @@ export default {
                                 ppl[eff[key][k]][task.asg[j].nth] = {
                                     id: task.id,
                                     stage: key,
-                                    color: task.color
+                                    color: task.color,
+                                    editable: false
                                 };
                             }
                         }
@@ -337,9 +331,8 @@ export default {
             this.$store.commit('editTask', {});
         },
         updateTask(pplId, pplName, dateStr, nth) {
-            console.log('updateTask');
+            myUtil.logger(['updateTask'], 'me');
             let editTask = this.editTask, index;
-            console.log(stageList);
             if(stageList.indexOf(this.daylyWork) < 0){ // 非法阶段值
                 for(let i=0; i<editTask.asg.length; i++){ // 遍历查找项目参与者
                     if(editTask.asg[i].id === pplId){
@@ -352,6 +345,9 @@ export default {
                                 // 删除当前日期
                                 console.log('remove date');
                                 eff[s].splice(j, 1);
+                                this.pplList[pplId][dateStr][nth].id = null;
+                                this.pplList[pplId][dateStr][nth].stage = null;
+                                this.pplList[pplId][dateStr][nth].color = 'transparent';
                             }
                             if(eff[s].length>0){ // 还有其他日期参与项目
                                 isEngaged = true;
