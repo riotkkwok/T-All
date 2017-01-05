@@ -337,6 +337,7 @@ export default {
                 for(let i=0; i<editTask.asg.length; i++){ // 遍历查找项目参与者
                     if(editTask.asg[i].id === pplId){
                         let isEngaged = false, 
+                            done = false,
                             eff = editTask.asg[i].effort,
                             j;
                         for(let s in eff){ // 遍历阶段找到当前编辑日期
@@ -348,9 +349,12 @@ export default {
                                 this.pplList[pplId][dateStr][nth].id = null;
                                 this.pplList[pplId][dateStr][nth].stage = null;
                                 this.pplList[pplId][dateStr][nth].color = 'transparent';
+                                done = true;
                             }
                             if(eff[s].length>0){ // 还有其他日期参与项目
                                 isEngaged = true;
+                            }
+                            if(!!isEngaged && !!done){
                                 break;
                             }
                         }
