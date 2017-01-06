@@ -87,6 +87,7 @@ module.exports = {
             'staticInfo': path.join(__dirname, path.component, 'staticInfo/staticInfo.js'),
             'myUtil': path.join(__dirname, path.lib, 'util.js'),
             'viewFilters': path.join(__dirname, path.lib, 'viewFilters.js'),
+            'dataFactory': 'src/static/js/data/dataFactory.js',
         },
         publicPath: '/'
     },
