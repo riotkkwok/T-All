@@ -1,8 +1,8 @@
-export const newSingleTask = () => {
+export const newSingleTask = (color) => {
     const st = {
         id: '', // 任务ID
         name: '', // 任务名
-        color: 'transparent', // 颜色
+        color: color || 'transparent', // 颜色
         asg: [ // 参与人员
         ],
         pjm: '', // 项目经理

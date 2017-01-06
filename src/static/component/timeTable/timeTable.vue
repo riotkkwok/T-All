@@ -8,6 +8,7 @@ import { mapState, mapActions, mapMutations } from 'vuex'
 
 import * as myUtil from 'myUtil'
 import { stageList } from 'staticInfo'
+import { newSingleTask } from 'dataFactory'
 
 const createPList = (assignees, dates) => {
     const pplList = {};
@@ -289,18 +290,18 @@ export default {
             if(!!t.editable && t === this.lastEditDay){
                 return;
             }
-            // 判断点击日期的位置是否合法
-            for(let i=0; i<this.editTask.asg.length; i++){
-                if(this.editTask.asg[i].id === pplId && nth !== this.editTask.asg[i].nth){ 
-                    // 若已参与者位置不一致则忽略
-                    return;
-                }
-            }
             if(t.id === null || (this.editTask && t.id === this.editTask.id)){
                 if(this.$store.getters['isAdmin']){
                     if(this.mode === 0){
                         this.$store.commit('showAddTaskDialog', true);  
                     }else if(this.mode === 1){
+                        // 判断点击日期的位置是否合法
+                        for(let i=0; i<this.editTask.asg.length; i++){
+                            if(this.editTask.asg[i].id === pplId && nth !== this.editTask.asg[i].nth){ 
+                                // 若已参与者位置不一致则忽略
+                                return;
+                            }
+                        }
                         if(!t.editable){ // 不是正在编辑
                             this.daylyWork = t.stage || '';
                             if(!!this.lastEditDay){
@@ -332,7 +333,8 @@ export default {
             this.$store.commit('showAddTaskDialog', false);
             this.$store.commit('showDetails', true);
             this.mode = 1;
-            this.$store.commit('editTask', {});
+            // TODO - get color for new task
+            this.$store.commit('editTask', newSingleTask('#6666ff'));
         },
         updateTask(pplId, pplName, dateStr, nth) {
             myUtil.logger(['updateTask'], 'me');
@@ -371,6 +373,14 @@ export default {
                     }
                 }
             }else{ // 合法阶段值
+                if(editTask.asg.length === 0){ // 新建任务无参与者
+                    myUtil.addToList(editTask, 'asg', {
+                        id: pplId,
+                        name: pplName,
+                        effort: {},
+                        nth: nth
+                    });
+                }
                 // 添加未参与项目的参与者
                 for(let i=0; i<editTask.asg.length; i++){
                     if(editTask.asg[i].id === pplId){
