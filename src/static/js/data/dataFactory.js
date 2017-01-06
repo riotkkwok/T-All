@@ -1,6 +1,9 @@
-export const newSingleTask = (color) => {
+export const newSingleTask = (id, color) => {
+    if(id === null){
+        return;
+    }
     const st = {
-        id: '', // 任务ID
+        id: id, // 任务ID
         name: '', // 任务名
         color: color || 'transparent', // 颜色
         asg: [ // 参与人员
