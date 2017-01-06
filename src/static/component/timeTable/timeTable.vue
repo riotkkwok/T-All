@@ -284,13 +284,17 @@ export default {
             this.$store.commit('detailedTask', t);
             this.$store.commit('showDetails', true);
         },
-        selectTask(t) {
+        selectTask(t, pplId, nth) {
             // console.log('selectTask');
             if(!!t.editable && t === this.lastEditDay){
                 return;
             }
-            if(false){ // TODO － 若已参与者位置不一致则忽略
-                return;
+            // 判断点击日期的位置是否合法
+            for(let i=0; i<this.editTask.asg.length; i++){
+                if(this.editTask.asg[i].id === pplId && nth !== this.editTask.asg[i].nth){ 
+                    // 若已参与者位置不一致则忽略
+                    return;
+                }
             }
             if(t.id === null || (this.editTask && t.id === this.editTask.id)){
                 if(this.$store.getters['isAdmin']){
