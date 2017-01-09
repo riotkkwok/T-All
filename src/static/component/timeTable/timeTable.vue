@@ -334,6 +334,10 @@ export default {
                 console.warn('It is the last date to be editted.');
                 return;
             }
+            if(!!t[nth].id && !!t[nth].stage){
+                console.warn('It is unavailable at that day.');
+                return;
+            }
 
             // 注意：这是一个保证watch lastEditDay按顺序执行的hack
             setTimeout(function(){
