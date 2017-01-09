@@ -154,6 +154,11 @@ export default {
     watch: {
         lastEditDay(val) {
             this.pplList = this.runPplList(val);
+        },
+        mode(val){
+            if(val === 0){
+                this.pplList = this.runPplList(val);
+            }
         }
     },
     directives: {
