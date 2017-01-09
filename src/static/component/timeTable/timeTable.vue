@@ -251,7 +251,7 @@ export default {
             for(let id in this.pplList){
                 tmp = this.pplList[id];
                 tmpDate = va.startDate;
-                while(tmpDate <= va.endDate){
+                while(tmpDate <= va.endDate && tmpDate <= new Date(this.endDate)){
                     pushTask(result, tmp[myUtil.dateString(tmpDate)][0].id);
                     pushTask(result, tmp[myUtil.dateString(tmpDate)][1].id);
                     tmpDate.setDate(tmpDate.getDate() + 1);
@@ -330,9 +330,14 @@ export default {
             const that = this;
             this.unselectTask();
 
+            if(!t || !t[nth]){
+                console.warn('It is the last date to be editted.');
+                return;
+            }
+
             // 注意：这是一个保证watch lastEditDay按顺序执行的hack
             setTimeout(function(){
-                that.selectTask(t, pplId, nth);
+                that.selectTask(t[nth], pplId, nth);
             }, 100);
         },
         goBack() {
