@@ -63,7 +63,7 @@ div#details(v-show="showDetails", :class=" mode === 1 ? 'editable' : '' ")
             div.info-val.newline
                 span(v-show="mode === 0")
                     | {{ task.remark }}
-                textarea.remarkInput(type="text", v-model="task2.remark", placeholder="备注", resize="none", v-show="mode === 1")
+                textarea.remarkInput(type="text", v-model="task2.remark", placeholder="备注", v-show="mode === 1")
     div.btn-section
         button.back-btn(@click="goBack")
             | 返回
