@@ -286,7 +286,7 @@ export default {
             this.$store.commit('showDetails', true);
         },
         selectTask(t, pplId, nth) {
-            // console.log('selectTask');
+            myUtil.logger(['selectTask'], 'me');
             if(!!t.editable && t === this.lastEditDay){
                 return;
             }
@@ -326,6 +326,15 @@ export default {
                 this.lastEditDay = {};
             }
         },
+        selectNext(t, pplId, nth) {
+            const that = this;
+            this.unselectTask();
+
+            // 注意：这是一个保证watch lastEditDay按顺序执行的hack
+            setTimeout(function(){
+                that.selectTask(t, pplId, nth);
+            }, 100);
+        },
         goBack() {
             this.$store.commit('showAddTaskDialog', false);
         },
@@ -333,8 +342,8 @@ export default {
             this.$store.commit('showAddTaskDialog', false);
             this.$store.commit('showDetails', true);
             this.mode = 1;
-            // TODO - get color for new task
-            this.$store.commit('editTask', newSingleTask('#6666ff'));
+            // TODO - get id, color for new task
+            this.$store.commit('editTask', newSingleTask('3', '#6666ff'));
         },
         updateTask(pplId, pplName, dateStr, nth) {
             myUtil.logger(['updateTask'], 'me');
@@ -400,6 +409,11 @@ export default {
                 myUtil.addToList(editTask.asg[index].effort, this.daylyWork, dateStr, true);
             }
             this.$store.commit('editTask', editTask);
+        },
+        nextDate(ds) {
+            const d = new Date(ds);
+            d.setDate(d.getDate()+1);
+            return myUtil.dateString(d);
         },
     }
 };
