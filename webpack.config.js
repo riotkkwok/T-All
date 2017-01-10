@@ -88,7 +88,7 @@ module.exports = {
             'myUtil': path.join(__dirname, path.lib, 'util.js'),
             'viewFilters': path.join(__dirname, path.lib, 'viewFilters.js'),
             'dataFactory': 'src/static/js/data/dataFactory.js',
-            'ajax': 'src/static/js/data/ajax.js',
+            'ajax': 'src/static/js/api/ajax.js',
         },
         publicPath: '/'
     },
