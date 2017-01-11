@@ -35,11 +35,17 @@ export const ajax = (options) => {
                 resp = {};
             }
             if(xhr.status === 200){
-                sucFn(resp, xhr);
+                if(typeof sucFn === 'function'){
+                    sucFn(resp, xhr);
+                }
             }else{
-                errFn(xhr);
+                if(typeof errFn === 'function'){
+                    errFn(xhr);
+                }
             }
-            doneFn(xhr);
+            if(typeof doneFn === 'function'){
+                doneFn(xhr);
+            }
         }
     };
 
