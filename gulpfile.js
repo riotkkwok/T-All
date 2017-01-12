@@ -1,7 +1,9 @@
 const gulp = require('gulp'),
     gutil = require('gulp-util'),
     clean = require('gulp-clean'),
+    jsonmin = require('gulp-jsonminify'),
     webpack = require('webpack'),
+    webpackServer = require('webpack-dev-server'),
     // runSequence = require('run-sequence'),
     es = require('event-stream'),
     fs = require('fs'),
@@ -9,9 +11,10 @@ const gulp = require('gulp'),
     config = require('./config.js'),
     http = require('http'),
     wpConfig = require('./webpack.config.js');
+let server;
 
 function runWebpack(){
-    webpack(wpConfig, function(err, stats){
+    const compiler = webpack(wpConfig, function(err, stats){
         if(err){
           throw new gutil.PluginError('webpack', err);
 
@@ -21,12 +24,21 @@ function runWebpack(){
         }
         gutil.log('[webpack]', stats.toString());
     });
+    if(!server){
+        wpConfig.entry.index.unshift('webpack-dev-server/client?http://localhost:5000/');
+        server = new webpackServer(compiler, {
+            contentBase: 'dist/static/',
+            publicPath: ''
+        });
+        server.listen(5000);
+    }
 }
 
 function copyFiles(){
     const baseUrl = './src/static/',
-        fileList = [path.join(__dirname, baseUrl, 'js/api/mock.js')];
+        fileList = [path.join(__dirname, baseUrl, 'mock/*.json')];
     gulp.src(fileList)
+        .pipe(jsonmin())
         .pipe(gulp.dest(path.join(__dirname, config.path.dest, 'mockApi')));
 }
 

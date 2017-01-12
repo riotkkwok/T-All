@@ -7,6 +7,7 @@ const path = require('path'),
         }
     },
     config = {
+        isDebug: true,
         deployserver: setting.deployserver,
         path: {
             root: setting.deployserver.root,

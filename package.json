@@ -43,6 +43,7 @@
     "gulp-html-beautify": "^1.0.1",
     "gulp-inline-source": "^2.1.0",
     "gulp-jade": "^1.1.0",
+    "gulp-jsonminify": "^1.0.0",
     "html-webpack-plugin": "^2.22.0",
     "node-sass": "^3.12.5",
     "node.extend": "^1.1.5",
