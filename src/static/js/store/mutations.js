@@ -27,3 +27,7 @@ export const showEditingToast = (state, val) => {
 export const showAddTaskDialog = (state, val) => {
     state.showAddTaskDialog = !!val;
 }
+
+export const taskList = (state, obj) => {
+    state.taskList = myUtil.clone(obj);
+}

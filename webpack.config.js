@@ -28,7 +28,7 @@ module.exports = {
 
     },
     entry: {
-        'index': './src/static/js/index.js'
+        'index': ['./src/static/js/index.js']
     },
     output: {
         path: path.join(__dirname, config.path.jsDest),
@@ -87,8 +87,9 @@ module.exports = {
             'staticInfo': path.join(__dirname, path.component, 'staticInfo/staticInfo.js'),
             'myUtil': path.join(__dirname, path.lib, 'util.js'),
             'viewFilters': path.join(__dirname, path.lib, 'viewFilters.js'),
-            'dataFactory': 'src/static/js/data/dataFactory.js',
-            'ajax': 'src/static/js/lib/ajax.js',
+            'dataFactory': path.join(__dirname, 'src/static/js/data/dataFactory.js'),
+            'apis': path.join(__dirname, 'src/static/js/api/apis.js'),
+            'ajax': path.join(__dirname, path.lib, 'ajax.js'),
         },
         publicPath: '/'
     },
