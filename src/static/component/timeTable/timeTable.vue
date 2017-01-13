@@ -44,8 +44,19 @@ const pushTask = (tList, tId) => {
 }
 
 export default {
+    created() {
+        this.$on('update', function(){
+            this.startDate = this.$store.getters['startDate'],
+            this.nowDate = this.$store.getters['nowDate'],
+            this.endDate = this.$store.getters['endDate'],
+            this.taskList = this.$store.getters['taskList'],
+            this.pplList = this.runPplList();
+            this.needRender = true;
+            this.visibleArea();
+        });
+    },
     mounted() {
-        this.pplList = this.runPplList();
+        // this.pplList = this.runPplList();
         this.needRender = true;
         window.onresize = this.visibleArea;
         this.visibleArea();
