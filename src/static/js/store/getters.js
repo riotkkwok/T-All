@@ -38,10 +38,7 @@ export const nowDate = (state) => {
 }
 
 export const endDate = (state) => {
-    const y = state.nowDate ? 
-        state.nowDate.getFullYear() : state.startDate ? 
-        state.startDate.getFullYear() : (new Date()).getFullYear();
-    return new Date(y+'/12/31');
+    return state.endDate;
 }
 
 export const holidayList = (state) => {

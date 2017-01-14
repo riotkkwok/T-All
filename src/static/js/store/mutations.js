@@ -32,6 +32,19 @@ export const userInfo = (state, obj) => {
     state.userInfo = myUtil.clone(obj);
 }
 
+export const dateInfo = (state, obj) => {
+    state.startDate = new Date(obj.startDate);
+    state.nowDate = new Date(obj.nowDate);
+    if(!!obj.endDate){
+        state.endDate = new Date(obj.endDate);
+    }else{
+        const y = state.nowDate ? 
+            state.nowDate.getFullYear() : state.startDate ? 
+            state.startDate.getFullYear() : (new Date()).getFullYear();
+        state.endDate = new Date(y+'/12/31');
+    }
+}
+
 export const taskList = (state, obj) => {
     state.taskList = myUtil.clone(obj);
 }

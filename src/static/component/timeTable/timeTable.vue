@@ -59,7 +59,7 @@ export default {
         // this.pplList = this.runPplList();
         this.needRender = true;
         window.onresize = this.visibleArea;
-        this.visibleArea();
+        // this.visibleArea();
     },
     data(){
         return {
