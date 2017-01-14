@@ -6,7 +6,7 @@ export const init = ({commit}, rs, rj) => {
 
     const counter = (function(){
         let reqCount = 0;
-        const totalReq = 3;
+        const totalReq = 4;
 
         return function(isFailed){
             if(!!isFailed){
@@ -28,6 +28,8 @@ export const init = ({commit}, rs, rj) => {
     queryDateInfo({commit}, counter);
 
     // 获取参与者列表
+    queryAssigneeList({commit}, counter);
+
     // 获取任务列表
     queryTaskList({commit}, counter);
 }
@@ -65,6 +67,21 @@ export const queryDateInfo = ({commit}, counterFn) => {
         }
     }, function(e){
         myUtil.logger(['queryDateInfo()', 'ajax error'], 'a');
+        if(typeof counterFn === 'function'){
+            counterFn(1);
+        }
+        // TODO - 处理错误情况
+    });
+}
+
+export const queryAssigneeList = ({commit}, counterFn) => {
+    request('queryAssigneeList', function(resp){
+        commit('assigneeList', resp.data);
+        if(typeof counterFn === 'function'){
+            counterFn();
+        }
+    }, function(e){
+        myUtil.logger(['queryAssigneeList()', 'ajax error'], 'a');
         if(typeof counterFn === 'function'){
             counterFn(1);
         }

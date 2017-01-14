@@ -45,6 +45,10 @@ export const dateInfo = (state, obj) => {
     }
 }
 
+export const assigneeList =(state, obj) => {
+    state.assigneeList = myUtil.clone(obj);
+}
+
 export const taskList = (state, obj) => {
     state.taskList = myUtil.clone(obj);
 }
