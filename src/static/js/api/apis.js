@@ -2,6 +2,7 @@ import { ajax } from 'ajax'
 
 const isDebug = true;
 const apiList = {
+    queryUserInfo: '',
     queryTaskList: ''
 };
 

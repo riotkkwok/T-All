@@ -4,9 +4,9 @@ import { request } from 'apis'
 export const init = ({commit}, rs, rj) => {
     // 初始化数据
 
-    const update = (function(){
+    const counter = (function(){
         let reqCount = 0;
-        const totalReq = 1;
+        const totalReq = 2;
 
         return function(isFailed){
             if(!!isFailed){
@@ -22,10 +22,12 @@ export const init = ({commit}, rs, rj) => {
     })();
 
     // 获取用户信息
+    queryUserInfo({commit}, counter);
+
     // 获取日期信息
     // 获取参与者列表
     // 获取任务列表
-    queryTaskList({commit}, update);
+    queryTaskList({commit}, counter);
 }
 
 export const userLogout = ({commit}) => {
@@ -38,16 +40,31 @@ export const userLogin = ({commit}) => {
     myUtil.logger(['userLogin()'], 'a');
 };
 
-export const queryTaskList = ({commit}, updFn) => {
+export const queryUserInfo = ({commit}, counterFn) => {
+    request('queryUserInfo', function(resp){
+        commit('userInfo', resp.data);
+        if(typeof counterFn === 'function'){
+            counterFn();
+        }
+    }, function(e){
+        myUtil.logger(['queryUserInfo()', 'ajax error'], 'a');
+        if(typeof counterFn === 'function'){
+            counterFn(1);
+        }
+        // TODO - 处理错误情况
+    });
+}
+
+export const queryTaskList = ({commit}, counterFn) => {
     request('queryTaskList', function(resp){
         commit('taskList', resp.data);
-        if(typeof updFn === 'function'){
-            updFn();
+        if(typeof counterFn === 'function'){
+            counterFn();
         }
     }, function(e){
         myUtil.logger(['queryTaskList()', 'ajax error'], 'a');
-        if(typeof updFn === 'function'){
-            updFn(1);
+        if(typeof counterFn === 'function'){
+            counterFn(1);
         }
         // TODO - 处理错误情况
     });

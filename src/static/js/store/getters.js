@@ -14,7 +14,7 @@ export const loginInfo = (state) => {
 }
 
 export const isLogined = (state) => {
-    return !!loginInfo(state).userId;
+    return !!loginInfo(state) && !!loginInfo(state).userId;
 }
 
 export const isAdmin = (state) => {

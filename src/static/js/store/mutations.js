@@ -28,6 +28,10 @@ export const showAddTaskDialog = (state, val) => {
     state.showAddTaskDialog = !!val;
 }
 
+export const userInfo = (state, obj) => {
+    state.userInfo = myUtil.clone(obj);
+}
+
 export const taskList = (state, obj) => {
     state.taskList = myUtil.clone(obj);
 }

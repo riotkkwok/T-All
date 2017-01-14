@@ -70,6 +70,11 @@ a.logo {
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 module.exports = {
+    created() {
+        this.$on('update', function(){
+            this.username = this.$store.getters['loginInfo'].userName;
+        });
+    },
     data(){
         return {
             showSettingsList: false,

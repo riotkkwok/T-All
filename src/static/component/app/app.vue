@@ -33,7 +33,7 @@ export default {
             this.$store.dispatch('init', resolve, reject);
         }).then(function(){
             that.$children.forEach(function(child){
-                if(child.$options._componentTag === 'wTimeTable'){
+                if(/wHeader|wTimeTable/.test(child.$options._componentTag)){
                     child.$emit('update');
                 }
             })
