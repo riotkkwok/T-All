@@ -135,7 +135,15 @@ export default {
             this.mode = 1;
         },
         confirm() {
-            // TODO
+            new Promise((rs, rj) => {
+                this.$store.dispatch('addTask', {rs, rj});
+            }).then(() => {
+                this.$store.commit('editTask', null);
+                this.exitDetails();
+                this.mode = 0;
+            }, () => {
+                // TODO - 显示错误信息
+            });
         }
     } 
 }

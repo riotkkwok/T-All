@@ -133,17 +133,21 @@ export const queryTaskList = ({commit}, counterFn) => {
         commit('taskList', resp.data);
         if(typeof counterFn === 'function'){
             counterFn();
+        }else if(typeof counterFn === 'object' && counterFn.rs && counterFn.rj){
+            counterFn.rs();
         }
     }, function(e){
         myUtil.logger(['queryTaskList()', 'ajax error'], 'a');
         if(typeof counterFn === 'function'){
             counterFn(1);
+        }else if(typeof counterFn === 'object' && counterFn.rs && counterFn.rj){
+            counterFn.rj();
         }
         // TODO - 处理错误情况
     });
 }
 
-export const preAddTask = ({commit}, rs, rj) => {
+export const preAddTask = ({commit}, {rs, rj}) => {
     request('preAddTask', {
         type: 'GET',
         dataType: 'json',
@@ -153,9 +157,27 @@ export const preAddTask = ({commit}, rs, rj) => {
             const task = newSingleTask(resp.data.id, resp.data.color);
             commit('editTask', task);
             rs();
-            return;
+        }else{
+            rj();
         }
+    }, function(e){
+        myUtil.logger(['preAddTask()', 'ajax error'], 'a');
         rj();
+        // TODO - 处理错误情况
+    });
+}
+
+export const addTask = ({commit, getters}, {rs, rj}) => {
+    request('addTask', {
+        type: 'GET',
+        dataType: 'json',
+        data: getters['editTask']
+    }, function(resp){
+        if(resp.code === 0 && resp.data.result === 0){
+            queryTaskList({commit}, {rs, rj});
+        }else{
+            rj();
+        }
     }, function(e){
         myUtil.logger(['preAddTask()', 'ajax error'], 'a');
         rj();

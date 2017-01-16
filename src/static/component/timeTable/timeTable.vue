@@ -365,7 +365,7 @@ export default {
         },
         addTask() {
             new Promise((rs, rj) => {
-                this.$store.dispatch('preAddTask', rs, rj);
+                this.$store.dispatch('preAddTask', {rs, rj});
             }).then(() => {
                 this.$store.commit('showAddTaskDialog', false);
                 this.$store.commit('showDetails', true);
