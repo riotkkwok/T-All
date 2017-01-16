@@ -45,7 +45,11 @@ export const userLogin = ({commit}) => {
 };
 
 export const queryUserInfo = ({commit}, counterFn) => {
-    request('queryUserInfo', function(resp){
+    request('queryUserInfo', {
+        type: 'GET',
+        dataType: 'json',
+        data: {}
+    }, function(resp){
         commit('userInfo', resp.data);
         if(typeof counterFn === 'function'){
             counterFn();
@@ -60,7 +64,11 @@ export const queryUserInfo = ({commit}, counterFn) => {
 }
 
 export const queryDateInfo = ({commit}, counterFn) => {
-    request('queryDateInfo', function(resp){
+    request('queryDateInfo', {
+        type: 'GET',
+        dataType: 'json',
+        data: {}
+    }, function(resp){
         commit('dateInfo', resp.data);
         if(typeof counterFn === 'function'){
             counterFn();
@@ -75,7 +83,11 @@ export const queryDateInfo = ({commit}, counterFn) => {
 }
 
 export const queryAssigneeList = ({commit}, counterFn) => {
-    request('queryAssigneeList', function(resp){
+    request('queryAssigneeList', {
+        type: 'GET',
+        dataType: 'json',
+        data: {}
+    }, function(resp){
         commit('assigneeList', resp.data);
         if(typeof counterFn === 'function'){
             counterFn();
@@ -90,7 +102,11 @@ export const queryAssigneeList = ({commit}, counterFn) => {
 }
 
 export const queryTaskList = ({commit}, counterFn) => {
-    request('queryTaskList', function(resp){
+    request('queryTaskList', {
+        type: 'GET',
+        dataType: 'json',
+        data: {}
+    }, function(resp){
         commit('taskList', resp.data);
         if(typeof counterFn === 'function'){
             counterFn();
