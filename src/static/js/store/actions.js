@@ -35,12 +35,34 @@ export const init = ({commit}, rs, rj) => {
 }
 
 export const userLogout = ({commit}) => {
-    // TODO
+    request('login', {
+        type: 'GET',
+        dataType: 'json',
+        data: {}
+    }, function(resp){
+        commit('userInfo', {});
+    }, function(e){
+        myUtil.logger(['queryUserInfo()', 'ajax error'], 'a');
+        commit('userInfo', {});
+    });
     myUtil.logger(['userLogout()'], 'a');
 };
 
 export const userLogin = ({commit}) => {
-    // TODO
+    request('login', {
+        type: 'GET',
+        dataType: 'json',
+        data: {}
+    }, function(resp){
+        if(resp.code === '0' && resp.result === '0'){
+            queryUserInfo({commit});
+        }else{
+            // TODO - 显示登录失败
+        }
+    }, function(e){
+        myUtil.logger(['queryUserInfo()', 'ajax error'], 'a');
+        // TODO - 处理错误情况
+    });
     myUtil.logger(['userLogin()'], 'a');
 };
 
