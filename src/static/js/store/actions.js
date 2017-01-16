@@ -1,5 +1,6 @@
 import * as myUtil from 'myUtil'
 import { request } from 'apis'
+import { newSingleTask } from 'dataFactory'
 
 export const init = ({commit}, rs, rj) => {
     // 初始化数据
@@ -54,7 +55,7 @@ export const userLogin = ({commit}) => {
         dataType: 'json',
         data: {}
     }, function(resp){
-        if(resp.code === '0' && resp.result === '0'){
+        if(resp.code === 0 && resp.result === 0){
             queryUserInfo({commit});
         }else{
             // TODO - 显示登录失败
@@ -138,6 +139,26 @@ export const queryTaskList = ({commit}, counterFn) => {
         if(typeof counterFn === 'function'){
             counterFn(1);
         }
+        // TODO - 处理错误情况
+    });
+}
+
+export const preAddTask = ({commit}, rs, rj) => {
+    request('preAddTask', {
+        type: 'GET',
+        dataType: 'json',
+        data: {}
+    }, function(resp){
+        if(!!resp.data){
+            const task = newSingleTask(resp.data.id, resp.data.color);
+            commit('editTask', task);
+            rs();
+            return;
+        }
+        rj();
+    }, function(e){
+        myUtil.logger(['preAddTask()', 'ajax error'], 'a');
+        rj();
         // TODO - 处理错误情况
     });
 }

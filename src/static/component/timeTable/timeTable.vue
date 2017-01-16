@@ -364,11 +364,18 @@ export default {
             this.$store.commit('showAddTaskDialog', false);
         },
         addTask() {
-            this.$store.commit('showAddTaskDialog', false);
-            this.$store.commit('showDetails', true);
-            this.mode = 1;
-            // TODO - get id, color for new task
-            this.$store.commit('editTask', newSingleTask('3', '#6666ff'));
+            new Promise((rs, rj) => {
+                this.$store.dispatch('preAddTask', rs, rj);
+            }).then(() => {
+                this.$store.commit('showAddTaskDialog', false);
+                this.$store.commit('showDetails', true);
+                this.mode = 1;
+                this.$store.commit('editTask', newSingleTask('3', '#6666ff'));
+            }, () => {
+                this.$store.commit('showAddTaskDialog', false);
+                this.$store.commit('showDetails', true);
+                // TODO - 错误处理
+            });
         },
         updateTask(pplId, pplName, dateStr, nth) {
             myUtil.logger(['updateTask'], 'me');

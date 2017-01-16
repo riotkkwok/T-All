@@ -17,6 +17,8 @@ const apiList = {
     // 登出
     logout: '',
 
+    // 准备创建任务
+    preAddTask: '',
     // 新增任务
     addTask: '',
     // 修改任务
