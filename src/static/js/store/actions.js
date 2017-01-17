@@ -202,3 +202,23 @@ export const updateTask = ({commit, getters}, {rs, rj}) => {
         // TODO - 处理错误情况
     });
 }
+
+export const deleteTask = ({commit, getters}, {rs, rj}) => {
+    request('deleteTask', {
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            deleteId: getters['editTask'].id
+        }
+    }, function(resp){
+        if(resp.code === 0 && resp.data.result === 0){
+            queryTaskList({commit}, {rs, rj});
+        }else{
+            rj();
+        }
+    }, function(e){
+        myUtil.logger(['deleteTask()', 'ajax error'], 'a');
+        rj();
+        // TODO - 处理错误情况
+    });
+}
