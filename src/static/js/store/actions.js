@@ -36,14 +36,14 @@ export const init = ({commit}, rs, rj) => {
 }
 
 export const userLogout = ({commit}) => {
-    request('login', {
+    request('logout', {
         type: 'GET',
         dataType: 'json',
         data: {}
     }, function(resp){
         commit('userInfo', {});
     }, function(e){
-        myUtil.logger(['queryUserInfo()', 'ajax error'], 'a');
+        myUtil.logger(['userLogout()', 'ajax error'], 'a');
         commit('userInfo', {});
     });
     myUtil.logger(['userLogout()'], 'a');
@@ -61,7 +61,7 @@ export const userLogin = ({commit}) => {
             // TODO - 显示登录失败
         }
     }, function(e){
-        myUtil.logger(['queryUserInfo()', 'ajax error'], 'a');
+        myUtil.logger(['userLogin()', 'ajax error'], 'a');
         // TODO - 处理错误情况
     });
     myUtil.logger(['userLogin()'], 'a');
