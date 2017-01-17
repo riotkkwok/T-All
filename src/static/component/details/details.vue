@@ -128,19 +128,37 @@ export default {
                     this.mode = 0;
                 }
                 // TODO
+            }else if(this.mode === 2){
+                this.$store.commit('editTask', null);
+                this.exitDetails();
+                this.mode = 0;
             }
         },
         edit() {
             this.$store.commit('editTask', this.$store.getters['detailedTask']);
             this.mode = 1;
         },
-        confirm() {
+        confirmAdd() {
             new Promise((rs, rj) => {
                 this.$store.dispatch('addTask', {rs, rj});
             }).then(() => {
                 this.$store.commit('editTask', null);
                 this.exitDetails();
                 this.mode = 0;
+            }, () => {
+                // TODO - 显示错误信息
+            });
+        },
+        confirmUpdate() {
+            new Promise((rs, rj) => {
+                this.$store.dispatch('updateTask', {rs, rj});
+            }).then(() => {
+                this.$store.commit('editTask', null);
+                if(this.$store.getters['detailedTask'] === null){
+                    this.exitDetails();
+                }else{
+                    this.mode = 0;
+                }
             }, () => {
                 // TODO - 显示错误信息
             });

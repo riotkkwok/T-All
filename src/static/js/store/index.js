@@ -11,7 +11,7 @@ const state = {
     showDetails: false,
     showEditingToast: false,
     showAddTaskDialog: false,
-    mode: 0,
+    mode: 0, // 0是浏览模式，1是更新模式，2是新增模式
     userInfo: {},
     startDate: null,
     nowDate: null,

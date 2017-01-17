@@ -1,8 +1,8 @@
-div#details(v-show="showDetails", :class=" mode === 1 ? 'editable' : '' ")
+div#details(v-show="showDetails", :class="(mode === 1 || mode === 2) ? 'editable' : '' ")
     div.title
         span(v-show="mode === 0")
             | {{ task.name }}
-        input.nameInput(type="text", v-model="task2.name", placeholder="需求名", v-show="mode === 1")
+        input.nameInput(type="text", v-model="task2.name", placeholder="需求名", v-show="mode === 1 || mode === 2")
     ul.info-wrapper
         li.info-row.cf
             div.info-key
@@ -15,7 +15,7 @@ div#details(v-show="showDetails", :class=" mode === 1 ? 'editable' : '' ")
                         li.ppl-info-val
                             div.val-item(v-for="(time, phase) in ppl.effort")
                                 | {{ phase | phaseToString }} {{ time | timeToString }}
-                template(v-if="mode === 1")
+                template(v-if="mode === 1 || mode === 2")
                     ul.ppl-info(v-for="ppl in task2.asg")
                         li.ppl-info-name
                             | {{ ppl.name }} 
@@ -28,46 +28,48 @@ div#details(v-show="showDetails", :class=" mode === 1 ? 'editable' : '' ")
             div.info-val
                 span(v-show="mode === 0")
                     | {{ task.pjm }}
-                input.nameInput(type="text", v-model="task2.pjm", placeholder="项目经理", v-show="mode === 1")
+                input.nameInput(type="text", v-model="task2.pjm", placeholder="项目经理", v-show="mode === 1 || mode === 2")
         li.info-row.cf
             div.info-key
                 | 产品经理
             div.info-val
                 span(v-show="mode === 0")
                     | {{ task.pdm }}
-                input.nameInput(type="text", v-model="task2.pdm", placeholder="产品经理", v-show="mode === 1")
+                input.nameInput(type="text", v-model="task2.pdm", placeholder="产品经理", v-show="mode === 1 || mode === 2")
         li.info-row.cf
             div.info-key
                 | 美术设计
             div.info-val
                 span(v-show="mode === 0")
                     | {{ task.dsg }}
-                input.nameInput(type="text", v-model="task2.dsg", placeholder="美术设计", v-show="mode === 1")
+                input.nameInput(type="text", v-model="task2.dsg", placeholder="美术设计", v-show="mode === 1 || mode === 2")
         li.info-row.cf
             div.info-key
                 | web后端
             div.info-val
                 span(v-show="mode === 0")
                     | {{ task.wbe }}
-                input.nameInput(type="text", v-model="task2.wbe", placeholder="web后端", v-show="mode === 1")
+                input.nameInput(type="text", v-model="task2.wbe", placeholder="web后端", v-show="mode === 1 || mode === 2")
         li.info-row.cf
             div.info-key
                 | 测试人员
             div.info-val
                 span(v-show="mode === 0")
                     | {{ task.tsr }}
-                input.nameInput(type="text", v-model="task2.tsr", placeholder="测试人员", v-show="mode === 1")
+                input.nameInput(type="text", v-model="task2.tsr", placeholder="测试人员", v-show="mode === 1 || mode === 2")
         li.info-row.cf
             div.info-key.newline
                 | 备注
             div.info-val.newline
                 span(v-show="mode === 0")
                     | {{ task.remark }}
-                textarea.remarkInput(type="text", v-model="task2.remark", placeholder="备注", v-show="mode === 1")
+                textarea.remarkInput(type="text", v-model="task2.remark", placeholder="备注", v-show="mode === 1 || mode === 2")
     div.btn-section
         button.back-btn(@click="goBack")
             | 返回
         button.edit-btn(v-show="mode === 0 && !!isAdmin", @click="edit")
             | 修改
-        button.confirm-btn(v-show="mode === 1 && !!isAdmin", @click="confirm")
+        button.confirm-btn(v-show="mode === 1 && !!isAdmin", @click="confirmUpdate")
+            | 确定
+        button.confirm-btn(v-show="mode === 2 && !!isAdmin", @click="confirmAdd")
             | 确定

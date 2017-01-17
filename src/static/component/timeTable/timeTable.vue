@@ -115,7 +115,7 @@ export default {
             get() {
                 let taskAsg = {}, editTask = this.editTask,
                     asgList = this.$store.getters['assigneeList'];
-                if(this.mode !== 1 || !editTask){
+                if((this.mode !== 1 && this.mode !== 2) || !editTask){
                     return {};
                 }
                 for(let i=0; i<editTask.asg.length; i++){
@@ -188,7 +188,7 @@ export default {
             if(!!lastT){
                 const pplListExist = this.pplList;
                 // 追加正在编辑
-                if(this.$store.getters['isAdmin'] && this.mode === 1 && !!this.editTask){
+                if(this.$store.getters['isAdmin'] && (this.mode === 1 || this.mode === 2) && !!this.editTask){
                     let editTask = this.editTask;
                     // 遍历编辑中任务的参与人
                     for(i=0; i<editTask.asg.length; i++){
@@ -285,7 +285,7 @@ export default {
         viewDetail(tId) {
             let t;
             const that = this;
-            if(this.$store.getters['showDetails'] && this.mode === 1){
+            if(this.$store.getters['showDetails'] && (this.mode === 1 || this.mode ===2)){
                 this.$store.commit('showEditingToast', true);
                 setTimeout(function(){
                     that.$store.commit('showEditingToast', false);
@@ -310,7 +310,7 @@ export default {
                 if(this.$store.getters['isAdmin']){
                     if(this.mode === 0){
                         this.$store.commit('showAddTaskDialog', true);  
-                    }else if(this.mode === 1){
+                    }else if(this.mode === 1 || this.mode === 2){
                         // 判断点击日期的位置是否合法
                         for(let i=0; i<this.editTask.asg.length; i++){
                             if(this.editTask.asg[i].id === pplId && nth !== this.editTask.asg[i].nth){ 
@@ -334,7 +334,7 @@ export default {
         },
         unselectTask() {
             // console.log('unselectTask');
-            if(this.$store.getters['isAdmin'] && this.mode === 1){
+            if(this.$store.getters['isAdmin'] && (this.mode === 1 || this.mode === 2)){
                 this.daylyWork = '';
                 if(!!this.lastEditDay){
                     this.lastEditDay.editable = false;
@@ -369,7 +369,7 @@ export default {
             }).then(() => {
                 this.$store.commit('showAddTaskDialog', false);
                 this.$store.commit('showDetails', true);
-                this.mode = 1;
+                this.mode = 2;
                 this.$store.commit('editTask', newSingleTask('3', '#6666ff'));
             }, () => {
                 this.$store.commit('showAddTaskDialog', false);
