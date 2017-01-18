@@ -1,6 +1,6 @@
 <template lang="jade">
     footer
-        | Copyright &copy; 2015-2016 Rio Guo
+        | Copyright &copy; 2015-2017 Rio Kwok
 </template>
 
 <style lang="sass">
