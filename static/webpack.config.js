@@ -12,8 +12,8 @@ path.joinFormat = function(){
         .replace(/\\+/g, '/')
         .replace(/(^http[s]?:)[\/]+/g, '$1//');
 };
-path.component = 'src/static/component';
-path.lib = 'src/static/js/lib';
+path.component = 'src/component';
+path.lib = 'src/js/lib';
 
 
 module.exports = {
@@ -28,7 +28,7 @@ module.exports = {
 
     },
     entry: {
-        'index': ['./src/static/js/index.js']
+        'index': ['./src/js/index.js']
     },
     output: {
         path: path.join(__dirname, config.path.jsDest),
@@ -87,8 +87,8 @@ module.exports = {
             'staticInfo': path.join(__dirname, path.component, 'staticInfo/staticInfo.js'),
             'myUtil': path.join(__dirname, path.lib, 'util.js'),
             'viewFilters': path.join(__dirname, path.lib, 'viewFilters.js'),
-            'dataFactory': path.join(__dirname, 'src/static/js/data/dataFactory.js'),
-            'apis': path.join(__dirname, 'src/static/js/api/apis.js'),
+            'dataFactory': path.join(__dirname, 'src/js/data/dataFactory.js'),
+            'apis': path.join(__dirname, 'src/js/api/apis.js'),
             'ajax': path.join(__dirname, path.lib, 'ajax.js'),
         },
         publicPath: '/'
@@ -100,12 +100,12 @@ module.exports = {
         
         // html输出插件
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'src/static/jade/index.jade'),
+            template: path.join(__dirname, 'src/jade/index.jade'),
             filename: '../html/index.html',
             minify: false
         }),
         new ManifestPlugin({
-            fileName: '../../../dist/server/assets/rev-manifest.json',
+            fileName: '../../assets/rev-manifest.json',
             basePath: ''
         
         })

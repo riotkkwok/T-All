@@ -2,8 +2,8 @@ const path = require('path'),
     setting = {
         deployserver: {
             root: './dist',
-            path: '/static',
-            revRoot: './dist/server'
+            path: '',
+            revRoot: '../'
         }
     },
     config = {

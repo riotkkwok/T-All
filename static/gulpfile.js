@@ -27,7 +27,7 @@ function runWebpack(){
     if(!server){
         wpConfig.entry.index.unshift('webpack-dev-server/client?http://localhost:5000/');
         server = new webpackServer(compiler, {
-            contentBase: 'dist/static/',
+            contentBase: 'dist/',
             publicPath: ''
         });
         server.listen(5000);
@@ -35,7 +35,7 @@ function runWebpack(){
 }
 
 function copyFiles(){
-    const baseUrl = './src/static/',
+    const baseUrl = './src/',
         fileList = [path.join(__dirname, baseUrl, 'mock/*.json')];
     gulp.src(fileList)
         .pipe(jsonmin())
@@ -65,7 +65,7 @@ gulp.task('all', function(){
 });
 
 gulp.task('watch', function(){
-    gulp.watch(['./src/static/**/*.*'], ['all']);
+    gulp.watch(['./src/**/*.*'], ['all']);
 });
 
 gulp.task('watchAll', ['all', 'watch']);
