@@ -24,14 +24,15 @@ function runWebpack(){
         }
         gutil.log('[webpack]', stats.toString());
     });
-    if(!server){
-        wpConfig.entry.index.unshift('webpack-dev-server/client?http://localhost:5000/');
-        server = new webpackServer(compiler, {
-            contentBase: 'dist/',
-            publicPath: ''
-        });
-        server.listen(5000);
-    }
+    // 已使用nginx配置静态资源路径，不需要webpack server
+    // if(!server){
+    //     wpConfig.entry.index.unshift('webpack-dev-server/client?http://localhost:5000/');
+    //     server = new webpackServer(compiler, {
+    //         contentBase: 'dist/',
+    //         publicPath: ''
+    //     });
+    //     server.listen(5000);
+    // }
 }
 
 function copyFiles(){
