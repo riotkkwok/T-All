@@ -7,7 +7,7 @@
         "pm2": "^2.2.3"
     },
     "scripts": {
-        "start": "node ./bin/server"
+        "start": "node ./bin/app"
     },
     "repository": {
         "type": "git",
