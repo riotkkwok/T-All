@@ -4,36 +4,36 @@ const isDebug = true;
 const apiList = {
 
     // 用户信息
-    queryUserInfo: '',
+    queryUserInfo: '/apis/queryUserInfo',
     // 日期信息
-    queryDateInfo: '',
+    queryDateInfo: '/apis/queryDateInfo',
     // 参与者列表
-    queryAssigneeList: '',
+    queryAssigneeList: '/apis/queryAssigneeList',
     // 任务列表
-    queryTaskList: '',
+    queryTaskList: '/apis/queryTaskList',
 
     // 登录
-    login: '',
+    login: '/apis/login',
     // 登出
-    logout: '',
+    logout: '/apis/logout',
 
     // 准备创建任务
-    preAddTask: '',
+    preAddTask: '/apis/preAddTask',
     // 新增任务
-    addTask: '',
+    addTask: '/apis/addTask',
     // 修改任务
-    updateTask: '',
+    updateTask: '/apis/updateTask',
     // 删除任务
-    deleteTask: '',
+    deleteTask: '/apis/deleteTask',
     // 新增休假
-    addLeave: '',
+    addLeave: '/apis/addLeave',
     // 修改休假
-    updateLeave: '',
+    updateLeave: '/apis/updateLeave',
     // 删除休假
-    deleteLeave: '',
+    deleteLeave: '/apis/deleteLeave',
 
     // 更新参与者列表
-    adjustAssigneeList: ''
+    adjustAssigneeList: '/apis/adjustAssigneeList'
 };
 
 export const request = (name, options, sucFn, errFn) => {
