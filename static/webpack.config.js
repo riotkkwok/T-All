@@ -22,7 +22,7 @@ module.exports = {
         progress: true,
         colors: true,
         contentBase: config.deployserver.root,
-        port: 5000,
+        port: 9900,
         hot: true,
         inline: true
 
