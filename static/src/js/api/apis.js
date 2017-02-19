@@ -1,6 +1,6 @@
 import { ajax } from 'ajax'
 
-const isDebug = true;
+const isDebug = false;
 const apiList = {
 
     // 用户信息
