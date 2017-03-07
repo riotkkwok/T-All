@@ -1,7 +1,10 @@
 const handler = function(){
     console.log('addLeave handler');
     return function(cb){
-        cb(null, '');
+        /* mock response [start] */
+        const resp = {};
+        /* mock response [end] */
+        cb(null, JSON.stringify(resp));
     }
 }
 
