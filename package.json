@@ -4,7 +4,8 @@
     "description": "Task/Talent Allocation System",
     "dependencies": {
         "koa2": "2.0.0-alpha.7",
-        "pm2": "^2.2.3"
+        "pm2": "^2.2.3",
+        "mongoose": "^4.8.6"
     },
     "scripts": {
         "start": "node ./bin/app"
