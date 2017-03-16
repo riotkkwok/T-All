@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;   // 创建模型
 
 conn.on('open', function(){
     console.log('connectDB open');
-    mongoose.model('users', userSchema)
 });
 conn.on('error', function(){
     console.log('connectDB error');
