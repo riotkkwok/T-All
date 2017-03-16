@@ -37,8 +37,13 @@ app.use(co.wrap(function *(ctx, next) {
     console.log(name);
     console.log(param);
     if(handlers.hasOwnProperty(name)){
-        ctx.body = yield handlers[name].apply(this, param);
-        ctx.response.type = 'text/plain';
+        const data = yield handlers[name].apply(this, param);
+        const body = {
+            "code": 0,
+            "data": data
+        }
+        ctx.body = JSON.stringify(body);
+        ctx.response.type = 'application/json';
     }else{
         ctx.body = 'Koa 2 : 404 - Not Found';
     }
