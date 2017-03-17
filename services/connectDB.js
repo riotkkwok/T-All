@@ -27,6 +27,8 @@ const taskSchema = new Schema({
     id: String, // 任务ID
     name: String, // 任务名
     color: String, // 颜色
+    startDate: String, // 开始日期
+    endDate: String, // 结束日期
     asg: [ // 参与人员
         {
             id: String,
