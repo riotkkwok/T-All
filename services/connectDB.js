@@ -21,7 +21,8 @@ const userSchema = new Schema({
 const assigneeSchema = new Schema({
     id: String,
     name: String,
-    password: String
+    startDate: String,
+    endDate: String
 });
 const taskSchema = new Schema({
     id: String, // 任务ID
