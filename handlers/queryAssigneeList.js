@@ -1,28 +1,23 @@
+const assigneeModel = require('../services/connectDB.js').assignee;
+
 const handler = function(){
     console.log('queryAssigneeList handler');
     return function(cb){
-        /* mock response [start] */
-        const resp = {
-            "code": 0,
-            "data": [{
-                "id": "1",
-                "name": "Ben"
-            },{
-                "id": "2",
-                "name": "Chris"
-            },{
-                "id": "3",
-                "name": "Denis"
-            },{
-                "id": "4",
-                "name": "Frank"
-            },{
-                "id": "5",
-                "name": "Jack"
-            }]
-        };
-        /* mock response [end] */
-        cb(null, JSON.stringify(resp));
+        const pr = assigneeModel.
+            find().
+            sort({id: 'asc'}).
+            select('id name').
+            exec();
+        pr.then(function(rs){
+            let resp;
+            if(rs.length > 0){
+                resp = rs;
+            }else{
+                console.log('queryAssigneeList - no record');
+                resp = [];
+            }
+            cb(null, resp);
+        });
     }
 }
 
