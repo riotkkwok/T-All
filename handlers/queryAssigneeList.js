@@ -6,7 +6,7 @@ const handler = function(){
         const pr = assigneeModel.
             find().
             sort({id: 'asc'}).
-            select('id name').
+            select('-_id id name').
             exec();
         pr.then(function(rs){
             let resp;
