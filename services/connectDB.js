@@ -49,6 +49,10 @@ const taskSchema = new Schema({
     tsr: String, // 测试人员
     remark: String // 备注
 });
+const colorSchema = new Schema({
+    color: String, // 颜色RGB
+    vacantFrom: String // 空闲开始日
+});
 
 exports.user = conn.model('users', userSchema); // 与users集合关联
 exports.assignee = conn.model('assignees', assigneeSchema); // 与assignees集合关联
