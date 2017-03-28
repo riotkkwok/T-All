@@ -16,7 +16,9 @@ const userSchema = new Schema({
     userId: String,
     userName: String,
     password: String,
-    adminId: String
+    adminId: String,
+    ticket: String,
+    ticketValid: String
 }); // 定义了一个新的模型，但是此模式还未和users集合有关联
 const assigneeSchema = new Schema({
     id: String,
@@ -57,3 +59,4 @@ const colorSchema = new Schema({
 exports.user = conn.model('users', userSchema); // 与users集合关联
 exports.assignee = conn.model('assignees', assigneeSchema); // 与assignees集合关联
 exports.task = conn.model('tasks', taskSchema); // 与tasks集合关联
+exports.color = conn.model('colors', colorSchema); // 与colors集合关联
