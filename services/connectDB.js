@@ -18,7 +18,7 @@ const userSchema = new Schema({
     password: String,
     adminId: String,
     ticket: String,
-    ticketValid: String
+    ticketValid: Number
 }); // 定义了一个新的模型，但是此模式还未和users集合有关联
 const assigneeSchema = new Schema({
     id: String,
