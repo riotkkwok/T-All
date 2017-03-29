@@ -30,7 +30,7 @@ export default {
     mounted() {
         const that = this;
         new Promise((resolve, reject) => {
-            this.$store.dispatch('init', resolve, reject);
+            this.$store.dispatch('init', {rs: resolve, rj: reject});
         }).then(function(){
             that.$children.forEach(function(child){
                 if(/wHeader|wTimeTable/.test(child.$options._componentTag)){

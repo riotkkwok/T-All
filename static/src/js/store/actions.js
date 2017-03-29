@@ -2,7 +2,7 @@ import * as myUtil from 'myUtil'
 import { request } from 'apis'
 import { newSingleTask } from 'dataFactory'
 
-export const init = ({commit}, rs, rj) => {
+export const init = ({commit}, {rs, rj}) => {
     // 初始化数据
 
     const counter = (function(){
