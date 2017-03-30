@@ -144,3 +144,12 @@ export const reversePlainObject = (o, dest, dupHandleType) => {
 export const getType = (o) => {
     return Object.prototype.toString.call(o).toLowerCase().replace(/(\[object )|(\])/g, '');
 }
+
+export const getCookie = (key) => {
+    const arr = document.cookie.replace(/ /g, '').match(new RegExp('(?:^|;)'+ key +'(?:=)([^;]*)'));
+    if(arr && arr.length > 1){
+        return arr[1];
+    }else{
+        return undefined;
+    }
+}
