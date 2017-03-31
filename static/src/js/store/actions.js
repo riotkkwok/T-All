@@ -35,11 +35,11 @@ export const init = ({commit}, {rs, rj}) => {
     queryTaskList({commit}, counter);
 }
 
-export const userLogout = ({commit}) => {
+export const userLogout = ({commit}, {param, rs, rj}) => {
     request('logout', {
         type: 'GET',
         dataType: 'json',
-        data: {}
+        data: param
     }, function(resp){
         commit('userInfo', {});
     }, function(e){
