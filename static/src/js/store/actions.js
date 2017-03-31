@@ -49,20 +49,23 @@ export const userLogout = ({commit}) => {
     myUtil.logger(['userLogout()'], 'a');
 };
 
-export const userLogin = ({commit}) => {
+export const userLogin = ({commit}, {param, rs, rj}) => {
     request('login', {
         type: 'GET',
         dataType: 'json',
-        data: {}
+        data: param
     }, function(resp){
-        if(resp.code === 0 && resp.result === 0){
-            queryUserInfo({commit});
+        if(resp.code === 0 && resp.data.result === 0){
+            commit('userInfo', resp.data);
+            rs();
         }else{
             // TODO - 显示登录失败
+            rj();
         }
     }, function(e){
         myUtil.logger(['userLogin()', 'ajax error'], 'a');
         // TODO - 处理错误情况
+        rj();
     });
     myUtil.logger(['userLogin()'], 'a');
 };
