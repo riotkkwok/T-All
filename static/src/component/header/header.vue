@@ -71,14 +71,14 @@ import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 module.exports = {
     created() {
+        // TODO - to be deleted
         this.$on('update', function(){
             this.username = this.$store.getters['loginInfo'].userName;
         });
     },
     data(){
         return {
-            showSettingsList: false,
-            username: this.$store.getters['loginInfo'].userName
+            showSettingsList: false
         }
     },
     computed: {
@@ -87,6 +87,9 @@ module.exports = {
         },
         isLogined() {
             return this.isLoginStatusReady && !!this.$store.getters['loginInfo'].userName;
+        },
+        username() {
+            return this.$store.getters['loginInfo'].userName;
         }
     },
     methods: {
