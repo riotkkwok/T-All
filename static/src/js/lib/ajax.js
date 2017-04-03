@@ -67,6 +67,9 @@ export const ajax = (options) => {
     }else{
         xhr.open(opt.type, opt.url, opt.async);
     }
+    if(opt.type.toUpperCase() === 'POST'){
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    }
     xhr.send(opt.data);
 }
 
