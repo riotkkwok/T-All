@@ -139,6 +139,7 @@ export default {
                 let taskAsg = {}, editTask = this.$store.getters['editTask'];
             }
         },
+        // 当前可视区域内包含的任务
         taskView: {
             set(ls){
                 this.curTask = ls;
@@ -163,6 +164,7 @@ export default {
         }
     },
     watch: {
+        // 上一个编辑的日期
         lastEditDay(val) {
             this.pplList = this.runPplList(val);
         },
@@ -182,12 +184,14 @@ export default {
         }
     },
     methods: {
+        // 生成参与人的任务列表（对应页面表格的ViewModel）
         runPplList(lastT) {
             myUtil.logger(['runPplList'], 'me');
             let task, ppl, eff, i, j, k;
+            // 
             if(!!lastT){
                 const pplListExist = this.pplList;
-                // 追加正在编辑
+                // 追加正在编辑的任务，进行显示
                 if(this.$store.getters['isAdmin'] && (this.mode === 1 || this.mode === 2) && !!this.editTask){
                     let editTask = this.editTask;
                     // 遍历编辑中任务的参与人
@@ -248,6 +252,7 @@ export default {
                 }, 1000);
             }
         },
+        // 计算可视区域内的任务列表
         visibleArea() {
             const wpRect = document.querySelector('.tt-wrapper').getBoundingClientRect(),
                 hcW = document.querySelector('.tt-headCol').clientWidth,
