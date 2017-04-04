@@ -27,7 +27,8 @@ const handler = function(param){
             pr.then(function(rs){
                 if(rs && rs.nModified === 1 && rs.ok === 1){
                     resp.result = 0;
-                    that.cookies.set('NSESSIONID', ticket);
+                    that.cookies.set('uid', param.userId, {expires: new Date(dateValid)});
+                    that.cookies.set('NSESSIONID', ticket, {expires: new Date(dateValid)});
                     cb(null, resp);
                 }else{
                     if(!rs){

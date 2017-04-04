@@ -2,21 +2,22 @@ const crypto = require('crypto');
 
 const userModel = require('../services/connectDB.js').user;
 
-const handler = function(param){
+const handler = function(){
     console.log('queryUserInfo handler');
     const now = Date.now();
     const that = this;
     return function(cb){
-        const ticket = that.cookies.get('NSESSIONID');
+        const ticket = that.cookies.get('NSESSIONID'),
+            userId = that.cookies.get('uid');
 
-        if(!param || !param.userId || !ticket){
+        if(!userId || !ticket){
             cb({
                 msg: 'invalid request parameters.'
             }, {});
         }
 
         const pr = userModel.
-            find({userId: param.userId, ticket: ticket}).
+            find({userId: userId, ticket: ticket}).
             where('ticketValid').gt(now).
             limit(1).
             exec();
