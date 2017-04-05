@@ -375,7 +375,6 @@ export default {
                 this.$store.commit('showAddTaskDialog', false);
                 this.$store.commit('showDetails', true);
                 this.mode = 2;
-                this.$store.commit('editTask', newSingleTask('3', '#6666ff'));
             }, () => {
                 this.$store.commit('showAddTaskDialog', false);
                 this.$store.commit('showDetails', true);
