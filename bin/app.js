@@ -38,7 +38,8 @@ app.use(bodyparser());
 // handlers
 app.use(co.wrap(function *(ctx, next) {
     const name = ctx.url.replace('/', '').split('?')[0];
-    const param = ctx.request.body;
+    const param = ctx.method === 'POST' ? ctx.request.body : 
+        (!!ctx.query.reqBody ? JSON.parse(decodeURIComponent(ctx.query.reqBody)) : ctx.query);
     console.log(name);
     console.log(param);
     if(handlers.hasOwnProperty(name)){

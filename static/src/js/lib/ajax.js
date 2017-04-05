@@ -82,7 +82,12 @@ function toParamString(obj){
         if(str.length > 0){
             str += '&';
         }
-        str += (encodeURIComponent(key)+'='+encodeURIComponent(obj[key]));
+        if(typeof obj[key] === 'object'){
+            str = 'reqBody=' + encodeURIComponent(JSON.stringify(obj));
+            break;
+        }else{
+            str += (encodeURIComponent(key)+'='+encodeURIComponent(obj[key]));
+        }
     }
     return str;
 }
