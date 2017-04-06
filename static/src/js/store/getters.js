@@ -68,3 +68,11 @@ export const showEditingToast = (state) => {
 export const showAddTaskDialog = (state) => {
     return state.showAddTaskDialog;
 }
+
+export const toUpdateTable = (state) => {
+    return state.toUpdateTable;
+}
+
+export const toUpdateHeader = (state) => {
+    return state.toUpdateHeader;
+}

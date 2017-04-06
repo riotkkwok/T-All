@@ -52,3 +52,11 @@ export const assigneeList = (state, obj) => {
 export const taskList = (state, obj) => {
     state.taskList = myUtil.clone(obj);
 }
+
+export const toUpdateTable = (state, val) => {
+    state.toUpdateTable = !!val;
+}
+
+export const toUpdateHead = (state, val) => {
+    state.toUpdateHead = !!val;
+}
