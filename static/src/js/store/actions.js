@@ -59,7 +59,6 @@ export const queryUserInfo = ({commit}, counterFn) => {
         data: {}
     }, function(resp){
         commit('userInfo', resp.data);
-        commit('toUpdateHeader', true);
         if(typeof counterFn === 'function'){
             counterFn();
         }

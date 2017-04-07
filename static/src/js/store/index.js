@@ -21,8 +21,7 @@ const state = {
     assigneeList: [],
     detailedTask: null,
     editTask: null,
-    toUpdateTable: false, // 是否更新表格UI
-    toUpdateHeader: false // 是否更新页头
+    toUpdateTable: false // 是否更新表格UI
 };
 
 const store = new Vuex.Store({

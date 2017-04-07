@@ -72,7 +72,3 @@ export const showAddTaskDialog = (state) => {
 export const toUpdateTable = (state) => {
     return state.toUpdateTable;
 }
-
-export const toUpdateHeader = (state) => {
-    return state.toUpdateHeader;
-}
