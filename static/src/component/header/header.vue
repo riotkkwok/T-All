@@ -71,7 +71,6 @@ import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 module.exports = {
     created() {
-        // TODO - to be deleted
         this.$on('update', function(){
             this.username = this.$store.getters['loginInfo'].userName;
         });
@@ -91,6 +90,14 @@ module.exports = {
         username() {
             return this.$store.getters['loginInfo'].userName;
         }
+    },
+    watch: {
+        '$store.getters.toUpdateHead': function(val) {
+            if(!!val){
+                this.$emit('update');
+                this.$store.commit('toUpdateHead', false);
+            }
+        } 
     },
     methods: {
         logoClick() {

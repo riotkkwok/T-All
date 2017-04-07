@@ -172,7 +172,13 @@ export default {
             if(val === 0){
                 this.pplList = this.runPplList(val);
             }
-        }
+        },
+        '$store.getters.toUpdateTable': function(val) {
+            if(!!val){
+                this.$emit('update');
+                this.$store.commit('toUpdateTable', false);
+            }
+        } 
     },
     directives: {
         focus: {

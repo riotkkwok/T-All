@@ -2,37 +2,19 @@ import * as myUtil from 'myUtil'
 import { request } from 'apis'
 import { newSingleTask } from 'dataFactory'
 
-export const init = ({commit}, {rs, rj}) => {
-    // 初始化数据
-
-    const counter = (function(){
-        let reqCount = 0;
-        const totalReq = 4;
-
-        return function(isFailed){
-            if(!!isFailed){
-                reqCount = -Infinity;
-                rj();
-            }else{
-                reqCount++;
-                if(reqCount === totalReq){
-                    rs();
-                }
-            }
-        }
-    })();
-
+// 初始化数据
+export const init = ({commit}) => {
     // 获取用户信息
-    queryUserInfo({commit}, counter);
+    queryUserInfo({commit});
 
     // 获取日期信息
-    queryDateInfo({commit}, counter);
+    queryDateInfo({commit});
 
     // 获取参与者列表
-    queryAssigneeList({commit}, counter);
+    queryAssigneeList({commit});
 
     // 获取任务列表
-    queryTaskList({commit}, counter);
+    queryTaskList({commit});
 }
 
 export const userLogout = ({commit}, {param, rs, rj}) => {
@@ -51,7 +33,7 @@ export const userLogout = ({commit}, {param, rs, rj}) => {
 
 export const userLogin = ({commit}, {param, rs, rj}) => {
     request('login', {
-        type: 'GET',
+        type: 'POST',
         dataType: 'json',
         data: param
     }, function(resp){
@@ -77,6 +59,7 @@ export const queryUserInfo = ({commit}, counterFn) => {
         data: {}
     }, function(resp){
         commit('userInfo', resp.data);
+        commit('toUpdateHeader', true);
         if(typeof counterFn === 'function'){
             counterFn();
         }
@@ -134,6 +117,7 @@ export const queryTaskList = ({commit}, counterFn) => {
         data: {}
     }, function(resp){
         commit('taskList', resp.data);
+        commit('toUpdateTable', true);
         if(typeof counterFn === 'function'){
             counterFn();
         }else if(typeof counterFn === 'object' && counterFn.rs && counterFn.rj){
@@ -177,6 +161,8 @@ export const addTask = ({commit, getters}, {rs, rj}) => {
         data: getters['editTask']
     }, function(resp){
         if(resp.code === 0 && resp.data.result === 0){
+            // TODO - to be enhanced
+            // 更改为不需要重新拉取任务列表
             queryTaskList({commit}, {rs, rj});
         }else{
             rj();

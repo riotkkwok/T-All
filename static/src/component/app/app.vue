@@ -28,18 +28,7 @@ export default {
         wLoginPanel
     },
     mounted() {
-        const that = this;
-        new Promise((resolve, reject) => {
-            this.$store.dispatch('init', {rs: resolve, rj: reject});
-        }).then(function(){
-            that.$children.forEach(function(child){
-                if(/wHeader|wTimeTable/.test(child.$options._componentTag)){
-                    child.$emit('update');
-                }
-            })
-        }, function(){
-            // TODO - 异常处理
-        });
+        this.$store.dispatch('init');
     }
 };
 </script>
