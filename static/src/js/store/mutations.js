@@ -57,6 +57,6 @@ export const toUpdateTable = (state, val) => {
     state.toUpdateTable = !!val;
 }
 
-export const toUpdateHead = (state, val) => {
-    state.toUpdateHead = !!val;
+export const toUpdateHeader = (state, val) => {
+    state.toUpdateHeader = !!val;
 }
