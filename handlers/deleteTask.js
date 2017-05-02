@@ -9,11 +9,7 @@ const handler = function(param){
             remove({ id: param.deleteId }).
             exec();
         pr.then(function(rs){
-            console.log(rs);
             const resp = {};
-            console.log(rs.result);
-            console.log(rs.n);
-            console.log(rs.ok);
             if(rs.result && rs.result.n === 1 && rs.result.ok === 1){
                 resp.result = 0;
             }else{
