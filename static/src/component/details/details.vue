@@ -64,7 +64,8 @@ export default {
     },
     data() {
         return {
-            showEditBtn: this.$store.getters['isLogined'] && this.$store.getters['isAdmin']
+            showEditBtn: this.$store.getters['isLogined'] && this.$store.getters['isAdmin'],
+            showDeleteTaskDialog: false
         }
     },
     computed: {
@@ -138,6 +139,12 @@ export default {
             this.$store.commit('editTask', this.$store.getters['detailedTask']);
             this.mode = 1;
         },
+        showDeleteDialog() {
+            this.showDeleteTaskDialog = true;
+        },
+        cancelDelete() {
+            this.showDeleteTaskDialog = false;
+        },
         confirmAdd() {
             new Promise((rs, rj) => {
                 this.$store.dispatch('addTask', {rs, rj});
@@ -159,6 +166,17 @@ export default {
                 }else{
                     this.mode = 0;
                 }
+            }, () => {
+                // TODO - 显示错误信息
+            });
+        },
+        confirmDelete() {
+            new Promise((rs, rj) => {
+                this.$store.dispatch('deleteTask', {rs, rj});
+            }).then(() => {
+                this.$store.commit('editTask', null);
+                this.exitDetails();
+                this.mode = 0;
             }, () => {
                 // TODO - 显示错误信息
             });

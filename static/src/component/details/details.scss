@@ -2,7 +2,7 @@
 
 @import "../../scss/theme.scss";
 
-#details{
+.detail-box{
     border: 1px solid $bColor;
     border-radius: 5px;
     margin: 20px 5px;
@@ -74,6 +74,7 @@
 .val-item{}
 
 .btn-section{
+    position: relative;
     text-align: center;
     padding: 10px 0;
 }
@@ -91,4 +92,16 @@
 }
 .edit-btn, .confirm-btn{
     @extend %ui-btn;
+}
+.delete-btn{
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    color: $warnFontColor;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 30px;
+    cursor: pointer;
+    width: 40px;
+    background-color: transparent;
 }
