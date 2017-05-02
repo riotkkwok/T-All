@@ -18,6 +18,7 @@ const handler = function(param){
             const prAll = taskModel.
                 create(param);
             prAll.then(function(rs){
+                console.log(rs);
                 if(rs.id === param.id && rs.color === param.color){
                     resp.result = 0;
                     cb(null, resp);
@@ -39,7 +40,7 @@ const handler = function(param){
             exec();
         pr.then(function(rs){
             if(rs.length > 0){
-                param.id = rs[0].id;
+                param.id = ''+(parseInt(rs[0].id, 10)+1);
             }else{
                 param.id = '0';
             }
