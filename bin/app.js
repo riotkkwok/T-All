@@ -8,8 +8,9 @@ const handlers = {
     queryTaskList: require('../handlers/queryTaskList.js'),
     
     login: require('../handlers/login.js'),
-    logout: require('../handlers/logout.js'),
-
+    logout: require('../handlers/logout.js')
+};
+const handlersWithAuth = {
     preAddTask: require('../handlers/preAddTask.js'),
     addTask: require('../handlers/addTask.js'),
     updateTask: require('../handlers/updateTask.js'),
@@ -40,7 +41,7 @@ app.use(co.wrap(function *(ctx, next) {
     const name = ctx.url.replace('/', '').split('?')[0];
     const param = ctx.method === 'POST' ? ctx.request.body : 
         (!!ctx.query.reqBody ? JSON.parse(decodeURIComponent(ctx.query.reqBody)) : ctx.query);
-    console.log(name);
+    console.log('name: '+name);
     console.log(param);
     if(handlers.hasOwnProperty(name)){
         ctx.response.type = 'application/json';
@@ -54,11 +55,43 @@ app.use(co.wrap(function *(ctx, next) {
             body.data = data;
         }catch(e){
             console.log(e);
+            body.code = -1;
+        }finally{
+            ctx.body = JSON.stringify(body);
+        }
+    }else if(handlersWithAuth.hasOwnProperty(name)){
+        console.log('Authenticating...');
+        ctx.response.type = 'application/json';
+        const body = {
+            "code": 0,
+            "data": {}
+        }
+
+        try{
+            const result = yield handlers.queryUserInfo.call(ctx, param);
+            if(!result.userName || !result.userId || !result.adminId || result.adminId !== 'A1'){
+                body.code = -101;
+                ctx.body = JSON.stringify(body);
+                return;
+            }
+        }catch(e){
+            console.log(e);
+            body.code = -100;
+            ctx.body = JSON.stringify(body);
+            return;
+        }
+
+        try{
+            const data = yield handlersWithAuth[name].call(ctx, param);
+            body.code = 0;
+            body.data = data;
+        }catch(e){
+            console.log(e);
         }finally{
             ctx.body = JSON.stringify(body);
         }
     }else{
-        ctx.body = 'Koa 2 : 404 - Not Found';
+        ctx.body = 'T-All : 404 - Not Found';
     }
 }));
 
