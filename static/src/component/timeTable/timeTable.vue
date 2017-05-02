@@ -193,6 +193,9 @@ export default {
         // 生成参与人的任务列表（对应页面表格的ViewModel）
         runPplList(lastT) {
             myUtil.logger(['runPplList'], 'me');
+            if(this.$store.getters['assigneeList'].length  === 0 || this.taskList.length === 0){
+                return {};
+            }
             let task, ppl, eff, i, j, k;
             // 
             if(!!lastT){
@@ -277,7 +280,7 @@ export default {
             va.endDate.setDate(va.startDate.getDate()+va.size-1);
             for(let id in this.pplList){
                 tmp = this.pplList[id];
-                tmpDate = va.startDate;
+                tmpDate = new Date(va.startDate);
                 while(tmpDate <= va.endDate && tmpDate <= new Date(this.endDate)){
                     pushTask(result, tmp[myUtil.dateString(tmpDate)][0].id);
                     pushTask(result, tmp[myUtil.dateString(tmpDate)][1].id);

@@ -52,64 +52,53 @@ export const userLogin = ({commit}, {param, rs, rj}) => {
     myUtil.logger(['userLogin()'], 'a');
 };
 
-export const queryUserInfo = ({commit}, counterFn) => {
+export const queryUserInfo = ({commit}, {rs, rj}={}) => {
     request('queryUserInfo', {
         type: 'GET',
         dataType: 'json',
         data: {}
     }, function(resp){
         commit('userInfo', resp.data);
-        if(typeof counterFn === 'function'){
-            counterFn();
-        }
+        rs && rs();
     }, function(e){
         myUtil.logger(['queryUserInfo()', 'ajax error'], 'a');
-        if(typeof counterFn === 'function'){
-            counterFn(1);
-        }
+        rj && rj();
         // TODO - 处理错误情况
     });
 }
 
-export const queryDateInfo = ({commit}, counterFn) => {
+export const queryDateInfo = ({commit}, {rs, rj}={}) => {
     request('queryDateInfo', {
         type: 'GET',
         dataType: 'json',
         data: {}
     }, function(resp){
         commit('dateInfo', resp.data);
-        if(typeof counterFn === 'function'){
-            counterFn();
-        }
+        rs && rs();
     }, function(e){
         myUtil.logger(['queryDateInfo()', 'ajax error'], 'a');
-        if(typeof counterFn === 'function'){
-            counterFn(1);
-        }
+        rj && rj();
         // TODO - 处理错误情况
     });
 }
 
-export const queryAssigneeList = ({commit}, counterFn) => {
+export const queryAssigneeList = ({commit}, {rs, rj}={}) => {
     request('queryAssigneeList', {
         type: 'GET',
         dataType: 'json',
         data: {}
     }, function(resp){
         commit('assigneeList', resp.data);
-        if(typeof counterFn === 'function'){
-            counterFn();
-        }
+        commit('toUpdateTable', true);
+        rs && rs();
     }, function(e){
         myUtil.logger(['queryAssigneeList()', 'ajax error'], 'a');
-        if(typeof counterFn === 'function'){
-            counterFn(1);
-        }
+        rj && rj();
         // TODO - 处理错误情况
     });
 }
 
-export const queryTaskList = ({commit}, counterFn) => {
+export const queryTaskList = ({commit}, {rs, rj}={}) => {
     request('queryTaskList', {
         type: 'GET',
         dataType: 'json',
@@ -117,18 +106,10 @@ export const queryTaskList = ({commit}, counterFn) => {
     }, function(resp){
         commit('taskList', resp.data);
         commit('toUpdateTable', true);
-        if(typeof counterFn === 'function'){
-            counterFn();
-        }else if(typeof counterFn === 'object' && counterFn.rs && counterFn.rj){
-            counterFn.rs();
-        }
+        rs && rs();
     }, function(e){
         myUtil.logger(['queryTaskList()', 'ajax error'], 'a');
-        if(typeof counterFn === 'function'){
-            counterFn(1);
-        }else if(typeof counterFn === 'object' && counterFn.rs && counterFn.rj){
-            counterFn.rj();
-        }
+        rj && rj();
         // TODO - 处理错误情况
     });
 }
