@@ -49,7 +49,14 @@ export default {
             this.startDate = this.$store.getters['startDate'],
             this.nowDate = this.$store.getters['nowDate'],
             this.endDate = this.$store.getters['endDate'],
-            this.taskList = this.$store.getters['taskList'],
+            this.taskList = this.$store.getters['taskList'];
+            if(this.$store.getters['assigneeList'].length  === 0 
+                || this.startDate === null 
+                || this.nowDate === null 
+                || this.endDate === null 
+                || this.taskList.length === 0){
+                return;
+            }
             this.pplList = this.runPplList();
             this.needRender = true;
             this.visibleArea();
@@ -193,9 +200,6 @@ export default {
         // 生成参与人的任务列表（对应页面表格的ViewModel）
         runPplList(lastT) {
             myUtil.logger(['runPplList'], 'me');
-            if(this.$store.getters['assigneeList'].length  === 0 || this.taskList.length === 0){
-                return {};
-            }
             let task, ppl, eff, i, j, k;
             // 
             if(!!lastT){
