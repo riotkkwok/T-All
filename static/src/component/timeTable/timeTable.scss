@@ -28,6 +28,7 @@
     display: inline-block;
     // padding-bottom: 10px;
     background-color: $bgColor1;
+    z-index: 1;
 }
 .tt-wrapper{
     overflow-x: scroll;
