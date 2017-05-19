@@ -101,7 +101,7 @@ module.exports = {
             this.showSettingsList = false;
         },
         logoutClick() {
-            this.$store.dispatch(['userLogout']);
+            this.$store.dispatch('userLogout');
             this.showSettingsList = false;
         }
     }
