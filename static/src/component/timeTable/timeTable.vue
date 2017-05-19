@@ -30,7 +30,8 @@ const createPList = (assignees, dates) => {
                 color: 'transparent',
                 editable: false
             },{
-                leaveType: null
+                leaveType: (assignees[i].leaves && assignees[i].leaves.length > 0 && assignees[i].leaves[dates[j]]) ? assignees[i].leaves[dates[j]].type : null,
+                leaveDuration: (assignees[i].leaves && assignees[i].leaves.length > 0 && assignees[i].leaves[dates[j]]) ? assignees[i].leaves[dates[j]].duration : null
             }];
         }
     }
@@ -464,6 +465,9 @@ export default {
             d.setDate(d.getDate()+1);
             return myUtil.dateString(d);
         },
+        goToLeavePage() {
+            // TODO
+        }
     }
 };
 

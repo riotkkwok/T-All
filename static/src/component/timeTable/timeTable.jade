@@ -7,7 +7,7 @@ div#timeTable(:class="(mode === 1 || mode === 2) ? 'editable' : '' ")
                 li.tt-name
                     | Name
             ul.tt-ppl.cf(v-for="ppl in pplList")
-                li.tt-name
+                li.tt-name(@click="goToLeavePage")
                     | {{ ppl.name }}
         div.tt-wrapper(@scroll="delayScroll(visibleArea)")
             div.tt-main(:style="dateListUI")
@@ -16,7 +16,7 @@ div#timeTable(:class="(mode === 1 || mode === 2) ? 'editable' : '' ")
                         | {{ date.dateStr2 }}
                 ul.tt-ppl.cf(v-for="ppl in pplList")
                     li.tt-date(v-for="date in dateList")
-                        ul.tt-task(v-if="!ppl[date.dateStr] || !ppl[date.dateStr].leaveType")
+                        ul.tt-task(:class="(ppl[date.dateStr] && ppl[date.dateStr][2].leaveType) ? 'onLeave' : '' ")
                             li.tt-taskItem(@click="selectTask(ppl[date.dateStr][0], ppl.id, 0)", :style="{ backgroundColor: ppl[date.dateStr][0].color }")
                                 template(v-if="ppl[date.dateStr][0].editable")
                                     input.stageInput(v-model="daylyWork", @input="updateTask(ppl.id, ppl.name, date.dateStr, 0)", @keydown.tab.prevent="selectNext(ppl[nextDate(date.dateStr)], ppl.id, 0)", @blur="unselectTask", v-focus="autoFocusInput")
@@ -27,8 +27,8 @@ div#timeTable(:class="(mode === 1 || mode === 2) ? 'editable' : '' ")
                                     input.stageInput(v-model="daylyWork", @input="updateTask(ppl.id, ppl.name, date.dateStr, 1)", @keydown.tab.prevent="selectNext(ppl[nextDate(date.dateStr)], ppl.id, 1)", @blur="unselectTask", v-focus="autoFocusInput")
                                 template(v-else)
                                     | {{ ppl[date.dateStr][1].stage }}
-                        div.tt-leave(v-if="ppl[date.dateStr] && ppl[date.dateStr][2].leaveType", @click="")
-                            | {{ ppl[date.dateStr][2].leaveType }}
+                            li.tt-leave
+                                | {{ ppl[date.dateStr][2].leaveType }} - {{ ppl[date.dateStr][2].leaveDuration }}
 
     div.taskView
         ul.tv-list.cf
