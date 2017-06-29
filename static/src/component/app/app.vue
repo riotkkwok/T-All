@@ -4,9 +4,7 @@
 
         wLoginPanel
 
-        wTimeTable
-
-        wDetails
+        router-view
 
         wFooter
 </template>
@@ -15,15 +13,11 @@
 import wHeader from 'header'
 import wFooter from 'footer'
 import wLoginPanel from 'loginPanel'
-import wTimeTable from 'timeTable'
-import wDetails from 'details'
 
 export default {
     name: 'app',
     components: {
         wHeader,
-        wDetails,
-        wTimeTable,
         wFooter,
         wLoginPanel
     },

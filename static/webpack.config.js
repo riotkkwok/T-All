@@ -14,6 +14,7 @@ path.joinFormat = function(){
 };
 path.component = 'src/component';
 path.lib = 'src/js/lib';
+path.page = 'src/page';
 
 
 module.exports = {
@@ -79,6 +80,9 @@ module.exports = {
         root: './',
         alias: {
             'app': path.join(__dirname, path.component, 'app/app.vue'),
+            'p-index': path.join(__dirname, path.page, 'p-index.vue'),
+            'p-leaves': path.join(__dirname, path.page, 'p-leaves.vue'),
+            'p-about': path.join(__dirname, path.page, 'p-about.vue'),
             'header': path.join(__dirname, path.component, 'header/header.vue'),
             'details': path.join(__dirname, path.component, 'details/details.vue'),
             'timeTable': path.join(__dirname, path.component, 'timeTable/timeTable.vue'),

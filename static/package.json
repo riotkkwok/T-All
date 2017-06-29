@@ -29,6 +29,7 @@
     "sass-loader": "^4.0.0",
     "vue-loader": "^10.0.2",
     "vue-lazyload-img": "^0.1.5",
+    "vue-router": "^2.7.0",
     "vuex": "^2.0.0",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
