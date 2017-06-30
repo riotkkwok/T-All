@@ -1,0 +1,11 @@
+div#editLeave
+    div.name {{ ppl.name }}
+    div.input-area
+        label 输入日期
+        input.dateInput(type="text", maxLength="8", placeholder="格式为20170101", @input="checkInput", v-model="leave.date")
+        select.timeInput(v-model="leave.time")
+            option(value="ALL") 全天
+            option(value="AM") 上午
+            option(value="PM") 下午
+        p.errMsg(v-show="isErr") {{ errMsg }}
+        button.submit-btn(@click="updateLeaves") 确定
