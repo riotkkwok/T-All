@@ -161,6 +161,7 @@ export const updateTask = ({commit, getters}, {rs, rj}) => {
         data: getters['editTask']
     }, function(resp){
         if(resp.code === 0 && resp.data.result === 0){
+            commit('detailedTask', getters['editTask']);
             queryTaskList({commit}, {rs, rj});
         }else{
             rj();

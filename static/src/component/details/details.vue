@@ -80,6 +80,7 @@ export default {
         showDetails() {
             return this.$store.getters['showDetails'];
         },
+        // 任务详情
         task() {
             let task = this.$store.getters['detailedTask'],
                 asgList = this.$store.getters['assigneeList'];
@@ -94,6 +95,7 @@ export default {
             }
             return task;
         },
+        // 任务编辑
         task2() {
             let task2 = this.$store.getters['editTask'],
                 asgList = this.$store.getters['assigneeList'];
