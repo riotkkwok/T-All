@@ -7,7 +7,7 @@ div#timeTable(:class="(mode === 1 || mode === 2) ? 'editable' : '' ")
                 li.tt-name
                     | Name
             ul.tt-ppl.cf(v-for="ppl in pplList")
-                li.tt-name(@click="goToLeavePage")
+                li.tt-name(@click="goToLeavePage(ppl.id, ppl.name)")
                     | {{ ppl.name }}
         div.tt-wrapper(@scroll="delayScroll(visibleArea)")
             div.tt-main(:style="dateListUI")

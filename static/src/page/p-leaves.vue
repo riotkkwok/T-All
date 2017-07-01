@@ -1,13 +1,18 @@
 <template lang="jade">
 div
-    | This is Leaves Page
+    wEditLeave
 </template>
 
 <script>
 import Vue from 'vue'
+import wEditLeave from 'editLeave'
 
 export default Vue.extend({
     components: {
+        wEditLeave
+    },
+    mounted() {
+        console.debug('p-leaves mounted');
     }
 });
 </script>

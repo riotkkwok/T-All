@@ -64,6 +64,7 @@ export default {
         });
     },
     mounted() {
+        console.debug('timeTable mounted');
         // this.pplList = this.runPplList();
         this.needRender = true;
         window.onresize = this.visibleArea;
@@ -465,8 +466,9 @@ export default {
             d.setDate(d.getDate()+1);
             return myUtil.dateString(d);
         },
-        goToLeavePage() {
-            // TODO
+        goToLeavePage(pplId, pplName) {
+            this.$store.commit('leaveTaker', {id: pplId, name: pplName})
+            this.$router.push('/leaves');
         }
     }
 };

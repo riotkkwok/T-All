@@ -56,3 +56,7 @@ export const taskList = (state, obj) => {
 export const toUpdateTable = (state, val) => {
     state.toUpdateTable = !!val;
 }
+
+export const leaveTaker = (state, val) => {
+    state.leaveTaker = val;
+}

@@ -6,11 +6,18 @@
 import Vue from 'vue'
 
 export default {
-    created() {},
+    beforeCreate() {
+        if(!this.$store.getters['leaveTaker']){
+            this.$router.push('/');
+        }
+    },
     data() {
         return {
-            ppl: {},
-            leave: {},
+            ppl: this.$store.getters['leaveTaker'] || {name: '', id: ''},
+            leave: {
+                date: '',
+                time: ''
+            },
             isErr: false,
             errMsg: ''
         }

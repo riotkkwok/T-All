@@ -72,3 +72,7 @@ export const showAddTaskDialog = (state) => {
 export const toUpdateTable = (state) => {
     return state.toUpdateTable;
 }
+
+export const leaveTaker = (state) => {
+    return state.leaveTaker;
+}
