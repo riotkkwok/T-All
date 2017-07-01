@@ -22,7 +22,7 @@ export default {
         wLoginPanel
     },
     mounted() {
-        this.$store.dispatch('init');
+        // this.$store.dispatch('init');
     }
 };
 </script>

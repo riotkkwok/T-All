@@ -14,6 +14,10 @@ export default Vue.extend({
     components: {
         wTimeTable,
         wDetails
+    },
+    mounted() {
+        console.debug('p-index mounted');
+        this.$store.dispatch('init');
     }
 });
 </script>
