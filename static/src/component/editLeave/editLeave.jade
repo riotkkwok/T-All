@@ -1,11 +1,24 @@
 div#editLeave
     div.name {{ ppl.name }}
     div.input-area
-        label 输入日期
-        input.dateInput(type="text", maxLength="8", placeholder="格式为20170101", @input="checkInput", v-model="leave.date")
-        select.timeInput(v-model="leave.time")
+        label 休假日期: 
+        input.dateInput(type="text", maxLength="8", placeholder="格式为20170101", pattern="^20[0-9]{6}$", @input="checkInput(false)", v-model="leave.date")
+    div.input-area
+        label 时间段: 
+        select.selectInput(v-model="leave.time")
             option(value="ALL") 全天
             option(value="AM") 上午
             option(value="PM") 下午
+    div.input-area
+        label 假期类型: 
+        select.selectInput(v-model="leave.type")
+            option(value="A") 年假
+            option(value="S") 病假
+            option(value="UP") 事假
+            option(value="UT") 调休
+            option(value="O") 其他
+    div.input-area
         p.errMsg(v-show="isErr") {{ errMsg }}
+    div.act-area.cf
+        button.cancel-btn(@click="backToTable") 取消
         button.submit-btn(@click="updateLeaves") 确定

@@ -3,11 +3,47 @@
 @import "../../scss/theme.scss";
 
 #editLeave{
-    .name{}
+    padding: 5px;
+    .name{
+        @extend %ui-font2;
+        text-indent: 5px;
+        border-bottom: 1px solid $bColor;
+        padding: 2px 0;
+    }
     .input-area{
-        label{}
-        input.dateInput{}
-        select.timeInput{}
-        .submit-btn{}
+        @extend %ui-font4;
+        margin: 10px 5px;
+        label{
+            margin-right: 20px;
+        }
+        input.dateInput{
+            text-align: center;
+            width: 110px;
+            margin-right: 10px;
+        }
+        select.selectInput{
+            text-align: center;
+            vertical-align: bottom;
+            width: 60px;
+        }
+        p.errMsg{
+            color: $warnFontColor;
+        }
+    }
+    .act-area{
+        padding: 20px 5px 10px;
+        .cancel-btn{
+            @extend %ui-btn2;
+            width: 80px;
+            border: 1px solid $mainColor;
+            border-radius: 3px;
+        }
+        .submit-btn{
+            @extend %ui-btn;
+            float: right;
+            width: 80px;
+            border: 1px solid $mainColor;
+            border-radius: 3px;
+        }
     }
 }
