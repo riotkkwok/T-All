@@ -16,4 +16,10 @@ footer{
     padding: 20px 0;
     background-color: $color1;
 }
+
+@media screen and (max-width: 450px){
+    footer{
+        padding: 10px 0;
+    }
+}
 </style>

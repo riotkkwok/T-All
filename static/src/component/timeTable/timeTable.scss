@@ -4,7 +4,6 @@
 
 #timeTable{
     margin: 5px;
-    padding: 5px;
     &.editable{
         box-shadow: 0 0 5px $bColor2;
         border: 1px solid $bColor2;
@@ -122,4 +121,10 @@ input.stageInput{
     width: 100%;
     height: 100%;
     box-shadow: inset 0 0 5px 1px $bColor2;
+}
+
+@media screen and (max-width: 450px){
+    .tv-item{
+        width: 140px;
+    }
 }
