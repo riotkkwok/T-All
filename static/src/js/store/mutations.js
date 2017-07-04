@@ -60,3 +60,22 @@ export const toUpdateTable = (state, val) => {
 export const leaveTaker = (state, val) => {
     state.leaveTaker = val;
 }
+
+export const leaveList = (state, val) => {
+    if(!val){
+        state.leaveList = [];
+        return;
+    }else if(myUtil.getType(val) === 'Array'){
+        state.leaveList = val;
+        return;
+    }
+    let ls = [];
+    for(let key in val){
+        ls.push({
+            date: key,
+            time: val[key].time,
+            type: val[key].type
+        });
+    }
+    state.leaveTaker = ls;
+}

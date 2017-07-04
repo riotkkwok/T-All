@@ -74,5 +74,9 @@ export const toUpdateTable = (state) => {
 }
 
 export const leaveTaker = (state) => {
-    return state.leaveTaker;
+    return myUtil.clone(state.leaveTaker);
+}
+
+export const leaveList = (state) => {
+    return myUtil.clone(state.leaveList);
 }

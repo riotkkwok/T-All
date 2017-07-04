@@ -22,7 +22,8 @@ const state = {
     detailedTask: null,
     editTask: null,
     toUpdateTable: false, // 是否更新表格UI
-    leaveTaker: null // 请假者
+    leaveTaker: null, // 请假者
+    leaveList: [] // 休假列表
 };
 
 const store = new Vuex.Store({
