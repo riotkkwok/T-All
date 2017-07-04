@@ -88,6 +88,8 @@ module.exports = {
             'timeTable': path.join(__dirname, path.component, 'timeTable/timeTable.vue'),
             'footer': path.join(__dirname, path.component, 'footer/footer.vue'),
             'loginPanel': path.join(__dirname, path.component, 'loginPanel/loginPanel.vue'),
+            'editLeave': path.join(__dirname, path.component, 'editLeave/editLeave.vue'),
+            'currentLeave': path.join(__dirname, path.component, 'currentLeave/currentLeave.vue'),
             'staticInfo': path.join(__dirname, path.component, 'staticInfo/staticInfo.js'),
             'myUtil': path.join(__dirname, path.lib, 'util.js'),
             'viewFilters': path.join(__dirname, path.lib, 'viewFilters.js'),
