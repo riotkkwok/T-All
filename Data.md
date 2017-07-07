@@ -111,6 +111,28 @@
 | name | String | 参与者名字 |
 | startDate | String | 开始时间（可分配任务） |
 | endDate | String | 结束时间（可分配任务） |
+| leaves | Object | 休假记录对象，以日期字符串(如20170101)为字段，对应的值是time(时段)和type(类型) |
+
+### 参考数据
+```
+{
+    "id": "0",
+    "name": "Jack",
+    "startDate": "2017/01/01",
+    "endDate": "2017/12/31",
+    "leaves": {
+        "20170102": {
+            "time": "ALL",
+            "type": "A"
+        },
+        "20170131": {
+            "time": "PM",
+            "type": "S"
+        }
+    }
+}
+```
+
 
 ## Colors表
 用于存储显示颜色信息
