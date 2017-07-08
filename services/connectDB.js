@@ -24,7 +24,8 @@ const assigneeSchema = new Schema({
     id: String,
     name: String,
     startDate: String,
-    endDate: String
+    endDate: String,
+    leaves: {}
 });
 const taskSchema = new Schema({
     id: String, // 任务ID
