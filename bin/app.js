@@ -16,7 +16,7 @@ const handlersWithAuth = {
     updateTask: require('../handlers/updateTask.js'),
     deleteTask: require('../handlers/deleteTask.js'),
 
-    addLeave: require('../handlers/addLeave.js'),
+    queryLeave: require('../handlers/queryLeave.js'),
     updateLeave: require('../handlers/updateLeave.js'),
     deleteLeave: require('../handlers/deleteLeave.js'),
     

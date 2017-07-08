@@ -25,8 +25,9 @@ const apiList = {
     updateTask: '/apis/updateTask',
     // 删除任务
     deleteTask: '/apis/deleteTask',
-    // 新增休假
-    addLeave: '/apis/addLeave',
+
+    // 休假列表
+    queryLeave: '/apis/queryLeave',
     // 修改休假
     updateLeave: '/apis/updateLeave',
     // 删除休假
@@ -43,6 +44,9 @@ export const request = (name, options, sucFn, errFn) => {
         options.dataType = 'text';
     }else{
         url = apiList[name];
+    }
+    if(!url){
+        throw new Error('Url to be requested is undefined');
     }
     ajax({
         url: url,
