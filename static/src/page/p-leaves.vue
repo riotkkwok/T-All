@@ -17,6 +17,9 @@ export default Vue.extend({
     },
     mounted() {
         console.debug('p-leaves mounted');
+        if(!this.$store.getters['isLogined'] || !this.$store.getters['isAdmin'] || !this.$store.getters['leaveTaker']){
+            this.$router.replace('/');
+        }
     }
 });
 </script>

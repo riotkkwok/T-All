@@ -467,8 +467,10 @@ export default {
             return myUtil.dateString(d);
         },
         goToLeavePage(pplId, pplName) {
-            this.$store.commit('leaveTaker', {id: pplId, name: pplName})
-            this.$router.push('/leaves');
+            if(this.$store.getters['isLogined'] && this.$store.getters['isAdmin']){
+                this.$store.commit('leaveTaker', {id: pplId, name: pplName})
+                this.$router.push('/leaves');
+            }
         }
     }
 };
