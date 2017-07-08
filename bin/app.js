@@ -87,6 +87,8 @@ app.use(co.wrap(function *(ctx, next) {
             body.data = data;
         }catch(e){
             console.log(e);
+            body.code = e.errCode;
+            body.msg = e.msg;
         }finally{
             ctx.body = JSON.stringify(body);
         }
