@@ -3,4 +3,28 @@
 @import "../../scss/theme.scss";
 
 #currentLeave{
+    border-top: 1px solid $bColor;
+    margin: 20px 5px;
+    .list-title{
+        @extend %ui-font2;
+        text-align: center;
+        padding: 4px 0;
+    }
+    .content-wrapper{}
+    .leave-row{
+        @extend %ui-font4;
+        display: -webkit-flex;
+        display: flex;
+        &:nth-child(odd){
+            background-color: $bgColor3;
+        }
+        &:first-child{
+            background-color: $bgColor2;
+        }
+    }
+    .leave-col{
+        text-align: center;
+        width: 25%;
+    }
+    button.delete-btn{}
 }

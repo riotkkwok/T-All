@@ -9,11 +9,6 @@ import * as myUtil from 'myUtil'
 let _lastInput;
 
 export default {
-    beforeCreate() {
-        if(!this.$store.getters['leaveTaker']){
-            this.$router.replace('/');
-        }
-    },
     data() {
         return {
             ppl: this.$store.getters['leaveTaker'] || {name: '', id: ''},
@@ -57,8 +52,43 @@ export default {
                 this.isErr = false;
                 this.errMsg = '';
             }
+            return result;
         },
-        updateLeaves() {},
+        updateLeaves() {
+            if(!this.checkInput(true)){
+                return;
+            }
+            if(!this.leave.time){
+                this.isErr = true;
+                this.errMsg = '休假时间不能为空;';
+                return;
+            }
+            if(!this.leave.type){
+                this.isErr = true;
+                this.errMsg = '假期类型不能为空;';
+                return;
+            }
+            new Promise((rs, rj) => {
+                this.$store.dispatch('updateLeave', {
+                    param: {
+                        date: this.leave.date,
+                        time: this.leave.time,
+                        type: this.leave.type
+                    },
+                    rs, rj
+                })
+            }).then(() => {
+                this.leave = {
+                    date: '',
+                    time: '',
+                    type: ''
+                };
+            }, () => {
+                this.isErr = true;
+                this.errMsg = '休假请求失败;';
+                // TODO - 错误处理
+            });
+        },
         backToTable() {
             this.$store.commit('leaveTaker', null);
             this.$router.replace('/');

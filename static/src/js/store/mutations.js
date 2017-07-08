@@ -77,5 +77,5 @@ export const leaveList = (state, val) => {
             type: val[key].type
         });
     }
-    state.leaveTaker = ls;
+    state.leaveList = ls;
 }

@@ -5,7 +5,7 @@
 #editLeave{
     padding: 5px;
     .name{
-        @extend %ui-font2;
+        @extend %ui-font1;
         text-indent: 5px;
         border-bottom: 1px solid $bColor;
         padding: 2px 0;

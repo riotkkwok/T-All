@@ -192,3 +192,68 @@ export const deleteTask = ({commit, getters}, {rs, rj}) => {
         // TODO - 处理错误情况
     });
 }
+
+export const updateLeave = ({commit, getters}, {param, rs, rj}) => {
+    request('updateLeave', {
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            id: getters['leaveTaker'].id,
+            date: param.date,
+            time: param.time,
+            type: param.type
+        }
+    }, function(resp){
+        if(resp.code === 0 && resp.data.result === 0){
+            rs();
+            queryLeave({commit, getters});
+        }else{
+            rj();
+        }
+    }, function(e){
+        myUtil.logger(['updateLeave()', 'ajax error'], 'a');
+        rj();
+    });
+}
+
+export const deleteLeave = ({commit, getters}, {param, rs, rj}) => {
+    request('deleteLeave', {
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            id: getters['leaveTaker'].id,
+            date: param.date
+        }
+    }, function(resp){
+        if(resp.code === 0 && resp.data.result === 0){
+            rs();
+            queryLeave({commit, getters});
+        }else{
+            rj();
+        }
+    }, function(e){
+        myUtil.logger(['deleteLeave()', 'ajax error'], 'a');
+        rj();
+    });
+}
+
+export const queryLeave = ({commit, getters}, {rs, rj}={}) => {
+    request('queryLeave', {
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            id: getters['leaveTaker'].id
+        }
+    }, function(resp){
+        if(resp.code === 0){
+            commit('leaveList', resp.data);
+            rs && rs();
+        }else{
+            rj && rj();
+        }
+    }, function(e){
+        myUtil.logger(['queryLeave()', 'ajax error'], 'a');
+        rj && rj();
+        // TODO - 处理错误情况
+    });
+}

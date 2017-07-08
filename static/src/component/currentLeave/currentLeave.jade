@@ -1,1 +1,20 @@
 div#currentLeave
+    div.list-title 休假记录
+    div.content-wrapper
+        ul.leave-row
+            li.leave-col 日期
+            li.leave-col 时段
+            li.leave-col 类型
+            li.leave-col 操作
+        template(v-for="leave in leaveList")
+            ul.leave-row
+                li.leave-col
+                    | {{ leave.date }}
+                li.leave-col
+                    | {{ leave.time }}
+                li.leave-col
+                    | {{ leave.type }}
+                li.leave-col
+                    button.delete-btn(@click="cancelLeave(leave.date)") 取消
+        div.leave-msg(v-show="msg !== ''")
+            | {{ msg }}
