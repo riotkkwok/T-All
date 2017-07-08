@@ -2,7 +2,6 @@ const assigneeModel = require('../services/connectDB.js').assignee;
 
 const handler = function(param){
     console.log('queryLeave handler');
-    const resp = {};
     return function(cb){
         const pr = assigneeModel.
             find({id: param.id}).
@@ -10,7 +9,7 @@ const handler = function(param){
             exec();
         pr.then(function(rs){
             console.log(rs);
-            const resp = {};
+            let resp = {};
             if(rs.length === 1){
                 resp = rs[0].leaves;
             }
