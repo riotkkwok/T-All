@@ -26,5 +26,13 @@
         text-align: center;
         width: 25%;
     }
-    button.delete-btn{}
+    a.delete-btn{
+        color: $warnFontColor;
+        cursor: pointer;
+    }
+    .leave-msg{
+        @extend %ui-font5;
+        text-align: center;
+        padding: 40px 0;
+    }
 }

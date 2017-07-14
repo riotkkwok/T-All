@@ -18,6 +18,7 @@ $fontColor: #000000 !default;
 $fontColor2: rgba(0,0,0, 0.75) !default;
 $fontColor3: #ffffff !default;
 $fontColor4: rgba(255,255,255, 0.75) !default;
+$fontColor5: #999999 !default;
 $warnFontColor: #ff2222 !default;
 
 %ui-font1{
@@ -40,6 +41,11 @@ $warnFontColor: #ff2222 !default;
     color: $fontColor2;
     font-size: 14px;
     line-height: 22px;
+}
+%ui-font5{
+    color: $fontColor5;
+    font-size: 16px;
+    line-height: 24px;
 }
 %ui-font1-rev{
     color: $fontColor3;

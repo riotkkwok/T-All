@@ -15,6 +15,6 @@ div#currentLeave
                 li.leave-col
                     | {{ leave.type }}
                 li.leave-col
-                    button.delete-btn(@click="cancelLeave(leave.date)") 取消
+                    a.delete-btn(@click="cancelLeave(leave.date)") 取消
         div.leave-msg(v-show="msg !== ''")
             | {{ msg }}
