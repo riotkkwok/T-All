@@ -106,4 +106,17 @@
         width: 40px;
         background-color: transparent;
     }
+
+    @media screen and (max-width: 450px){
+        .info-val, .info-key{
+            &.multi{
+                float: none;
+                display: block;
+                padding: 2px 0;
+            }
+        }
+        .info-val.multi{
+            padding-left: 10px;
+        }
+    }
 }

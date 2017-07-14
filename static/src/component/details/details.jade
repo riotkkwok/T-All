@@ -6,9 +6,9 @@ div#details(v-show="showDetails")
             input.nameInput(type="text", v-model="task2.name", placeholder="需求名", v-show="mode === 1 || mode === 2")
         ul.info-wrapper
             li.info-row.cf
-                div.info-key
+                div.info-key.multi
                     | 参与人员
-                div.info-val
+                div.info-val.multi
                     template(v-if="mode === 0")
                         ul.ppl-info(v-for="ppl in task.asg")
                             li.ppl-info-name
