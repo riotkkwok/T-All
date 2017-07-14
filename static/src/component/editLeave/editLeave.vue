@@ -83,6 +83,7 @@ export default {
                     time: '',
                     type: ''
                 };
+                this.$store.dispatch('queryLeave');
             }, () => {
                 this.isErr = true;
                 this.errMsg = '休假请求失败;';

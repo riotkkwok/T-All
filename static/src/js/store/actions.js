@@ -206,7 +206,6 @@ export const updateLeave = ({commit, getters}, {param, rs, rj}) => {
     }, function(resp){
         if(resp.code === 0 && resp.data.result === 0){
             rs();
-            queryLeave({commit, getters});
         }else{
             rj();
         }
@@ -227,7 +226,6 @@ export const deleteLeave = ({commit, getters}, {param, rs, rj}) => {
     }, function(resp){
         if(resp.code === 0 && resp.data.result === 0){
             rs();
-            queryLeave({commit, getters});
         }else{
             rj();
         }
