@@ -2,106 +2,108 @@
 
 @import "../../scss/theme.scss";
 
-.detail-box{
-    border: 1px solid $bColor;
-    border-radius: 5px;
-    margin: 20px 5px;
-    padding: 10px 18px;
-    &.editable{
-        box-shadow: 0 0 5px $bColor2;
-        border-color: $bColor2;
-    }
-    .nameInput{
-        border-bottom: 1px solid $bColor;
-        padding: 0 5px;
-        &:focus{
-            border-bottom-color: $bColor2;
+#details{
+    .detail-box{
+        border: 1px solid $bColor;
+        border-radius: 5px;
+        margin: 20px 5px;
+        padding: 10px 18px;
+        &.editable{
+            box-shadow: 0 0 5px $bColor2;
+            border-color: $bColor2;
+        }
+        .nameInput{
+            border-bottom: 1px solid $bColor;
+            padding: 0 5px;
+            &:focus{
+                border-bottom-color: $bColor2;
+            }
+        }
+        .remarkInput{
+            width: 90%;
+            resize: vertical;
         }
     }
-    .remarkInput{
-        width: 90%;
-        resize: vertical;
-    }
-}
 
-.title{
-    @extend %ui-font1;
-    text-align: center;
-    padding: 4px;
-    .nameInput{
+    .title{
+        @extend %ui-font1;
         text-align: center;
+        padding: 4px;
+        .nameInput{
+            text-align: center;
+        }
     }
-}
 
-.info-wrapper{
-    text-align: left;
-    padding: 5px;
-}
-.info-row{
-    padding: 3px 0;
-}
-.info-key{
-    @extend %ui-font2;
-    float: left;
-    font-weight: bold;
-    &.newline{
-        float: none;
-        display: block;
+    .info-wrapper{
+        text-align: left;
+        padding: 5px;
     }
-}
-.info-val{
-    @extend %ui-font4;
-    float: left;
-    padding-left: 20px;
-    &.newline{
-        float: none;
-        display: block;
+    .info-row{
+        padding: 3px 0;
     }
-}
+    .info-key{
+        @extend %ui-font2;
+        float: left;
+        font-weight: bold;
+        &.newline{
+            float: none;
+            display: block;
+        }
+    }
+    .info-val{
+        @extend %ui-font4;
+        float: left;
+        padding-left: 20px;
+        &.newline{
+            float: none;
+            display: block;
+        }
+    }
 
-.ppl-info{
-    padding: 2px 0;
-}
-.ppl-info-name{
-    display: inline-block;
-    line-height: 24px;
-    vertical-align: top;
-    width: 75px;
-}
-.ppl-info-val{
-    display: inline-block;
-}
-.val-item{}
+    .ppl-info{
+        padding: 2px 0;
+    }
+    .ppl-info-name{
+        display: inline-block;
+        line-height: 24px;
+        vertical-align: top;
+        width: 75px;
+    }
+    .ppl-info-val{
+        display: inline-block;
+    }
+    .val-item{}
 
-.btn-section{
-    position: relative;
-    text-align: center;
-    padding: 10px 0;
-}
-.back-btn, .edit-btn, .confirm-btn{
-    display: inline-block;
-    line-height: 30px;
-    cursor: pointer;
-    width: 30%;
-    border: 1px solid $mainColor;
-    border-radius: 3px;
-    margin: 0 10px;
-}
-.back-btn{
-    @extend %ui-btn2;
-}
-.edit-btn, .confirm-btn{
-    @extend %ui-btn;
-}
-.delete-btn{
-    position: absolute;
-    bottom: 10px;
-    right: 0;
-    color: $warnFontColor;
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 30px;
-    cursor: pointer;
-    width: 40px;
-    background-color: transparent;
+    .btn-section{
+        position: relative;
+        text-align: center;
+        padding: 10px 0;
+    }
+    .back-btn, .edit-btn, .confirm-btn{
+        display: inline-block;
+        line-height: 30px;
+        cursor: pointer;
+        width: 30%;
+        border: 1px solid $mainColor;
+        border-radius: 3px;
+        margin: 0 10px;
+    }
+    .back-btn{
+        @extend %ui-btn2;
+    }
+    .edit-btn, .confirm-btn{
+        @extend %ui-btn;
+    }
+    .delete-btn{
+        position: absolute;
+        bottom: 10px;
+        right: 0;
+        color: $warnFontColor;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 30px;
+        cursor: pointer;
+        width: 40px;
+        background-color: transparent;
+    }
 }
