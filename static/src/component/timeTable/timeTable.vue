@@ -107,7 +107,8 @@ export default {
                     dateStr2: myUtil.dateString2(d),
                     dayStr: myUtil.dayString(d),
                     isWE: !(d.getDay() % 6),
-                    isPH: !!this.$store.getters['holidayList'][myUtil.dateString(d)]
+                    isPH: this.$store.getters['holidayList'].indexOf(myUtil.dateString(d)) >= 0,
+                    isSW: this.$store.getters['spWorkingList'].indexOf(myUtil.dateString(d)) >= 0
                 });
                 if(d >= ed){
                     break;

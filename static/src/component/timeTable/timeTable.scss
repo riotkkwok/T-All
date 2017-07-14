@@ -66,6 +66,9 @@
     text-align: center;
     min-height: 1px;
     width: 45px;
+    &.weph{
+        background-color: $bgColor4;
+    }
 }
 .tt-task{
     position: relative;

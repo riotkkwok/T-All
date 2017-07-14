@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import * as getters from './getters'
 import * as actions from './actions'
 import * as mutations from './mutations'
+import { publicHoliday, specialWorkingDay } from 'staticInfo'
 
 Vue.use(Vuex);
 
@@ -16,7 +17,8 @@ const state = {
     startDate: null,
     nowDate: null,
     endDate: null,
-    holidayList: [],
+    holidayList: publicHoliday || [],
+    spWorkingList: specialWorkingDay || [],
     taskList: [],
     assigneeList: [],
     detailedTask: null,

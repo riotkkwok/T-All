@@ -45,6 +45,10 @@ export const holidayList = (state) => {
     return state.holidayList;
 }
 
+export const spWorkingList = (state) => {
+    return state.spWorkingList;
+}
+
 export const assigneeList = (state) => {
     return state.assigneeList;
 }

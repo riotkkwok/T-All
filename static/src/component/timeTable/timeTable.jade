@@ -15,7 +15,7 @@ div#timeTable(:class="(mode === 1 || mode === 2) ? 'editable' : '' ")
                     li.tt-date(v-for="date in dateList")
                         | {{ date.dateStr2 }}
                 ul.tt-ppl.cf(v-for="ppl in pplList")
-                    li.tt-date(v-for="date in dateList")
+                    li.tt-date(v-for="date in dateList", :class="{weph: !date.isSW && (date.isWE || date.isPH)}")
                         ul.tt-task(:class="(ppl[date.dateStr] && ppl[date.dateStr][2].leaveType) ? 'onLeave' : '' ")
                             li.tt-taskItem(@click="selectTask(ppl[date.dateStr][0], ppl.id, 0)", :style="{ backgroundColor: ppl[date.dateStr][0].color }")
                                 template(v-if="ppl[date.dateStr][0].editable")
