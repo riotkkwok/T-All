@@ -30,8 +30,8 @@ const createPList = (assignees, dates) => {
                 color: 'transparent',
                 editable: false
             },{
-                leaveType: (assignees[i].leaves && assignees[i].leaves.length > 0 && assignees[i].leaves[dates[j]]) ? assignees[i].leaves[dates[j]].type : null,
-                leaveDuration: (assignees[i].leaves && assignees[i].leaves.length > 0 && assignees[i].leaves[dates[j]]) ? assignees[i].leaves[dates[j]].duration : null
+                leaveType: (assignees[i].leaves && assignees[i].leaves[dates[j].dateStr]) ? assignees[i].leaves[dates[j].dateStr].type : null,
+                leaveDuration: (assignees[i].leaves && assignees[i].leaves[dates[j].dateStr]) ? assignees[i].leaves[dates[j].dateStr].time : null
             }];
         }
     }
@@ -240,7 +240,9 @@ export default {
                     for(let key in eff){
                         // 遍历每阶段的工作日期
                         for(k=0; k<eff[key].length; k++){
-                            if(ppl[eff[key][k]][task.asg[j].nth].id !== null){
+                            if(ppl[eff[key][k]][2].leaveType && ppl[eff[key][k]][2].leaveDuration === 'ALL'){
+                                // No task to display
+                            }else if(ppl[eff[key][k]][task.asg[j].nth].id !== null){
                                 console.error("Multi-tasks in the same place.");
                             }else{
                                 ppl[eff[key][k]][task.asg[j].nth] = {
