@@ -28,7 +28,7 @@ div#timeTable(:class="(mode === 1 || mode === 2) ? 'editable' : '' ")
                                 template(v-else)
                                     | {{ ppl[date.dateStr][1].stage }}
                             li.tt-leave
-                                | {{ ppl[date.dateStr][2].leaveType }} - {{ ppl[date.dateStr][2].leaveDuration }}
+                                |  {{ ppl[date.dateStr][2].leaveType }} -- {{ ppl[date.dateStr][2].leaveDuration }} 
 
     div.taskView
         ul.tv-list.cf

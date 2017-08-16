@@ -86,6 +86,8 @@
             &:hover{
                 .tt-leave{
                     display: block;
+                    color: $warnFontColor;
+                    background-color: $bgColor1;
                 }
             }
         }

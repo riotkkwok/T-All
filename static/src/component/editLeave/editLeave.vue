@@ -25,7 +25,7 @@ export default {
         checkInput(immediate) {
             let result;
             _lastInput = Date.now();
-            result = this.leave.date.match(/^(20[0-9]{2})((?:0[1-9])|10|11|12)([0-3][0-9])$/);
+            result = this.leave.date.match(/^(20[0-9]{2})\/((?:0[1-9])|10|11|12)\/([0-3][0-9])$/);
             if(!result || result.length <= 1){
                 result = false;
             }else{
