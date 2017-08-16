@@ -39,8 +39,14 @@ app.use(bodyparser());
 // handlers
 app.use(co.wrap(function *(ctx, next) {
     const name = ctx.url.replace('/', '').split('?')[0];
-    const param = ctx.method === 'POST' ? ctx.request.body : 
-        (!!ctx.query.reqBody ? JSON.parse(decodeURIComponent(ctx.query.reqBody)) : ctx.query);
+    const param = (function(){
+        let p;
+        p = ctx.method === 'POST' ? ctx.request.body : ctx.query;
+        if(p.reqBody){
+            p = JSON.parse(decodeURIComponent(p.reqBody));
+        }
+        return p;
+    })();
     console.log('name: '+name);
     console.log(param);
     if(handlers.hasOwnProperty(name)){

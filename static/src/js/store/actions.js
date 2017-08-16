@@ -19,7 +19,7 @@ export const init = ({commit}) => {
 
 export const userLogout = ({commit}) => {
     request('logout', {
-        type: 'GET',
+        type: 'POST',
         dataType: 'json',
         data: {}
     }, function(resp){
@@ -136,7 +136,7 @@ export const preAddTask = ({commit}, {rs, rj}) => {
 
 export const addTask = ({commit, getters}, {rs, rj}) => {
     request('addTask', {
-        type: 'GET',
+        type: 'POST',
         dataType: 'json',
         data: getters['editTask']
     }, function(resp){
@@ -156,7 +156,7 @@ export const addTask = ({commit, getters}, {rs, rj}) => {
 
 export const updateTask = ({commit, getters}, {rs, rj}) => {
     request('updateTask', {
-        type: 'GET',
+        type: 'POST',
         dataType: 'json',
         data: getters['editTask']
     }, function(resp){
@@ -175,7 +175,7 @@ export const updateTask = ({commit, getters}, {rs, rj}) => {
 
 export const deleteTask = ({commit, getters}, {rs, rj}) => {
     request('deleteTask', {
-        type: 'GET',
+        type: 'POST',
         dataType: 'json',
         data: {
             deleteId: getters['editTask'].id
