@@ -9,6 +9,7 @@ import app from 'app'
 import store from './store'
 import pageIndex from 'p-index'
 import pageLeaves from 'p-leaves'
+import pageAssignee from 'p-assignee'
 import pageAbout from 'p-about'
 
 const router = new VueRouter({
@@ -20,6 +21,10 @@ const router = new VueRouter({
         path: '/leaves',
         name: 'leaves',
         component: pageLeaves
+    }, {
+        path: '/assignee',
+        name: 'assignee',
+        component: pageAssignee
     }, {
         path: '/about',
         name: 'about',
