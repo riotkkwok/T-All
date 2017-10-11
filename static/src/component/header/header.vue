@@ -5,6 +5,7 @@ header
     div#username(@click="loginClick") 
         | {{ username || '游客' }}
     ul.settings-list(v-show="showSettingsList")
+        li.settings-item(v-show="isLogined && isAdmin" @click="assigneeManage") 参与者面板
         li.settings-item(v-show="!isLogined" @click="loginClick") 登录
         li.settings-item(v-show="isLogined" @click="logoutClick") 退出
 </template>
@@ -46,6 +47,7 @@ a.logo {
     width: 100px;
     border: 1px solid $color1;
     border-radius: 3px;
+    padding: 5px;
     background-color: $bgColor1;
     cursor: pointer;
     z-index: 5;
@@ -63,6 +65,7 @@ a.logo {
 .settings-item {
     @extend %ui-font1;
     text-align: center;
+    padding: 2px;
 }
 </style>
 
@@ -82,6 +85,9 @@ module.exports = {
         isLogined() {
             return this.isLoginStatusReady && !!this.$store.getters['loginInfo'].userName;
         },
+        isAdmin() {
+            return this.$store.getters['isAdmin'];
+        },
         username() {
             return this.$store.getters['loginInfo'].userName;
         }
@@ -92,6 +98,11 @@ module.exports = {
         },
         settingsClick() {
             this.showSettingsList = !this.showSettingsList;
+        },
+        assigneeManage() {
+            if(this.$store.getters['isLogined'] && this.$store.getters['isAdmin']){
+                this.$router.push('/assignee');
+            }
         },
         loginClick() {
             if(this.isLogined){
